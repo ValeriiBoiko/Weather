@@ -2,19 +2,19 @@ import { Action, Color, IconsMap, Images } from "../constants";
 
 const initialState = {
     data: {
-            sunrise: new Date(),
-            sunset: new Date(),
-            city: 'San Francisco',
+            sunrise: 'n/a',
+            sunset: 'n/a',
+            city: 'n/a',
             list: [
                 {
                     dt: new Date(),
-                    clouds: '50',
-                    temp: '17',
-                    feelsLike: '16',
-                    humidity: '70',
-                    description: 'Broken Clouds',
+                    clouds: 'n/a',
+                    temp: 'n/a',
+                    feelsLike: 'n/a',
+                    humidity: 'n/a',
+                    description: 'n/a',
                     title: 'cloudy',
-                    wind: 9,
+                    wind: 'n/a',
                     icon: '01d'
                 }
             ]
@@ -26,8 +26,10 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    if (action.type === Action.UPDATE_WEATHER) {
+    if (action.type === Action.UPDATE_WEATHER) {        
         const currentWeather = action.payload.list[0];
+        action.payload.sunrise *= 1000;
+        action.payload.sunset *= 1000;
 
         return {
             ...state,

@@ -1,15 +1,15 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, View, Text, StatusBar, Platform, ActivityIndicator, Dimensions } from 'react-native';
+import React, { Fragment } from 'react';
+import { SafeAreaView, ScrollView, View, Text, StatusBar, Platform, ActivityIndicator, Dimensions, StyleSheet } from 'react-native';
 import { Color, Action } from '../constants';
-import { widthPercentageToDP, heightPercentageToDP } from '../utils/units';
 import { connect } from 'react-redux';
-import WeatherDisplay from '../components/WeatherDisplay';
 
 import RNLocation from 'react-native-location';
-import { fetchWeatherData } from '../utils/api';
-import DetailWeatherInfo from '../components/DetailWeatherInfo';
 import TabBar from '../components/TabBar';
 import { bottomTabsConfig } from '../navigation/bottomTabs';
+import { common } from '../styles/common';
+import { heightPercentageToDP } from '../utils/units';
+import WeatherDisplay from '../components/WeatherDisplay';
+import DailyShortForecast from '../components/DaillyLineForecast';
 
 class WeeklyForecast extends React.Component {
 
@@ -36,7 +36,7 @@ class WeeklyForecast extends React.Component {
               //     this.props.updateWeather(data)
               //   })
               //   .catch(error => console.log(error))
-
+              // console.log('call')
             })
         }
       });
@@ -46,7 +46,10 @@ class WeeklyForecast extends React.Component {
         flex: 1
       }}>
         <SafeAreaView style={{
-          backgroundColor: Color.TAB_BAR,
+          backgroundColor: this.props.theme.backgroundColor
+        }}/>
+        <SafeAreaView style={{
+          backgroundColor: Color.WHITE,
           flex: 1
         }} onLayout={(e) => {
           this.setState({
@@ -55,7 +58,7 @@ class WeeklyForecast extends React.Component {
         }}>
 
           {/* <Preloader /> */}
-          <TabBar config={bottomTabsConfig()} />
+
           <ScrollView contentContainerStyle={{
             flexGrow: 1
           }}>
@@ -63,17 +66,31 @@ class WeeklyForecast extends React.Component {
 
             {
               this.state.availableHeight ? (
-                <View style={{
-                  flex: 1
-                }}>
-                  <Text>Weekly</Text>
+                <View style={common.flex}>
+                  <View style={{
+                    backgroundColor: this.props.theme.backgroundColor,
+                    height: heightPercentageToDP(40, this.state.availableHeight),
+                  }}>
+                    <WeatherDisplay />
+                  </View>
+
+
+                  <DailyShortForecast style={styles.dailyForecast}/>
+                  <DailyShortForecast style={styles.dailyForecast}/>
+                  <DailyShortForecast style={styles.dailyForecast}/>
+                  <DailyShortForecast style={styles.dailyForecast}/>
+                  <DailyShortForecast style={styles.dailyForecast}/>
                 </View>
               ) : null
             }
 
           </ScrollView>
+          <TabBar config={bottomTabsConfig()} />
         </SafeAreaView>
-        <StatusBar barStyle={'light-content'} backgroundColor={Color.CYAN} />
+        <SafeAreaView style={{
+          backgroundColor: Color.TAB_BAR
+        }}/>
+        <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} />
       </View>
     )
   }
@@ -99,8 +116,20 @@ class WeeklyForecast extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  dailyForecast: {
+    borderBottomColor: Color.TAB_BAR,
+    borderBottomWidth: 1,
+    marginHorizontal: '5%',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
+})
+
 const mapStateToProps = (state) => ({
-  theme: state.weather.displayTheme
+  theme: state.weather.displayTheme, 
+  weather: state.weather.list
 });
 
 const mapDispatchToProps = (dispatch) => ({

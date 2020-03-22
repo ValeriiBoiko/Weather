@@ -16,12 +16,12 @@ export async function fetchWeatherData(lat, lng, unit) {
                 return {
                     dt: forecast.dt,
                     clouds: forecast.clouds.all,
-                    temp: forecast.main.temp,
-                    feelsLike: forecast.main.feels_like,
+                    temp: forecast.main.temp.toFixed(1),
+                    feelsLike: forecast.main.feels_like.toFixed(1),
                     humidity: forecast.main.humidity,
                     description: forecast.weather[0].description,
                     title: forecast.weather[0].main,
-                    wind: forecast.wind.speed,
+                    wind: forecast.wind.speed.toFixed(1),
                     icon: forecast.weather[0].icon
                 };
             })

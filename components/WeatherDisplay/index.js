@@ -1,53 +1,41 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import RNImage from '../../ui/Image';
 import { Color, Font, IconsMap } from '../../constants';
 import { widthDependedPixel, widthPercentageToDP, heightDependedPixel } from '../../utils/units';
 import { connect } from 'react-redux';
 import Icon from '../../ui/Icon/Icon';
-
+import { common } from '../../styles/common';
 
 class WeatherDisplay extends React.Component {
 
     render() {
 
-        if (this.props.weather === undefined) {
-            return null;
-        }
-
         return (
             <View style={styles.container}>
-                <RNImage source={this.props.theme.backgroundImage} style={[
-                    styles.image
-                ]} />
+                <RNImage source={this.props.theme.backgroundImage}
+                    style={styles.image} />
 
                 <View style={styles.content}>
                     <View style={styles.info}>
                         <View>
                             <Text style={styles.city}>{this.props.city}</Text>
                             {this.getDate()}
-                            <Text style={styles.weather}>{this.titleCase(this.props.weather.description)}</Text>
+                            <Text style={styles.weather}>
+                                {this.titleCase(this.props.weather.description)}
+                            </Text>
                         </View>
 
-                        <Icon style={{
-                            lineHeight: widthDependedPixel(135), 
-                        }} size={widthDependedPixel(135)} name={IconsMap[this.props.weather.icon].icon} color={Color.WHITE} />
+                        <Icon size={widthDependedPixel(135)} name={IconsMap[this.props.weather.icon].icon} color={Color.WHITE} />
                     </View>
 
-                    <View style={{
-                        flex: 1,
-                        justifyContent: 'flex-end'
-                    }}>
-                        <View style={{
-                            flexDirection: 'row'
-                        }}>
+                    <View style={styles.tempContainer}>
+                        <View style={common.row}>
                             <Text style={styles.temperature}>{Math.round(this.props.weather.temp) || null}</Text>
                             <Text style={styles.unit}>°C</Text>
                         </View>
                     </View>
                 </View>
-
-
             </View>
         )
     }
@@ -76,7 +64,8 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         paddingHorizontal: '5%',
-        paddingBottom: widthPercentageToDP(2.5)
+        paddingBottom: widthPercentageToDP(2.5),
+        paddingTop: 10
     },
     image: {
         bottom: 0,
@@ -107,6 +96,10 @@ const styles = StyleSheet.create({
         lineHeight: widthDependedPixel(16),
         paddingTop: heightDependedPixel(17.5),
         fontFamily: Font.QUICKSAND_SEMIBOLD
+    },
+    tempContainer: {
+        justifyContent: 'flex-end',
+        flex: 1
     },
     temperature: {
         color: Color.WHITE,

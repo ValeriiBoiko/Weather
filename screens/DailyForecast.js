@@ -10,6 +10,7 @@ import { fetchWeatherData } from '../utils/api';
 import DetailWeatherInfo from '../components/DetailWeatherInfo';
 import TabBar from '../components/TabBar';
 import { bottomTabsConfig } from '../navigation/bottomTabs';
+import { Navigation } from 'react-native-navigation';
 
 class DailyForecast extends React.Component {
 
@@ -21,7 +22,7 @@ class DailyForecast extends React.Component {
     }
   }
 
-  render() {
+  componentDidMount () {
     RNLocation.configure({
       distanceFilter: 1000
     })
@@ -35,16 +36,20 @@ class DailyForecast extends React.Component {
               //   .then(data => {
               //     this.props.updateWeather(data)
               //   })
-              //   .catch(error => console.log(error))
+              //   .catch(error => console.log('Error in api'))
 
             })
+            .catch(error => console.log('Error in geolocation') )
         }
       });
+  }
+
+  render() {
+    
 
     return (
       <Fragment>
-        {/* <StatusBar barStyle={'light-content'} backgroundColor={Color.CYAN} /> */}
-        <SafeAreaView backgroundColor={Color.CYAN} />
+        <SafeAreaView backgroundColor={this.props.theme.backgroundColor} />
         <SafeAreaView style={{
           backgroundColor: Color.TAB_BAR,
           flex: 1
@@ -59,7 +64,6 @@ class DailyForecast extends React.Component {
           <ScrollView contentContainerStyle={{
             flexGrow: 1
           }}>
-
 
             {
               this.state.availableHeight ? (
@@ -81,6 +85,7 @@ class DailyForecast extends React.Component {
 
           </ScrollView>
           <TabBar config={bottomTabsConfig()} />
+        <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} />
         </SafeAreaView>
       </Fragment>
     )

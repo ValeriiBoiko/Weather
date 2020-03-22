@@ -4,7 +4,9 @@ export const Color = {
     DIRTY_BLUE: "#738e97",
     TAB_BAR: "#e7e7e8",
     WHITE: "#fff",
-    DARK_BLUE: "#293551"
+    DARK_BLUE: "#293551",
+    BLUE: "#5996f7",
+    BLACK: "#333"
 }
 
 export const Font = {
@@ -24,7 +26,8 @@ export const Action = {
 export const Images = {
     NIGHT: require("./assets/night.png"),
     SUNNY_DAY: require("./assets/sunny.png"),
-    CLOUDY_DAY: require("./assets/cloudy.png")
+    CLOUDY_DAY: require("./assets/cloudy.png"),
+    RAINY_DAY: require("./assets/rainy.png"),
 }
 
 export const IconsMap = {
@@ -44,7 +47,7 @@ export const IconsMap = {
         color: Color.CYAN
     },
     "02n": {
-        icon: "few-clouds-night",
+        icon: "cloud-night-1",
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
@@ -79,8 +82,8 @@ export const IconsMap = {
         color: Color.DARK_BLUE
     },
     "10d": {
-        icon: "rain",
-        background: require("./assets/rainy.png"),
+        icon: "rain-day",
+        image: Images.RAINY_DAY,
         color: Color.DIRTY_BLUE
     },
     "10n": {
@@ -90,7 +93,7 @@ export const IconsMap = {
     },
     "11d": {
         icon: "thunder",
-        background: require("./assets/rainy.png"),
+        image: Images.RAINY_DAY,
         color: Color.DIRTY_BLUE
     },
     "11n": {

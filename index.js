@@ -47,6 +47,9 @@ Navigation.events().registerAppLaunchedListener(() => {
                 bottomTabs: bottomTabsConfig(sources)
             }
         });
+    })
+    .catch(error => {
+        console.log('Error in navigation');
     });
 
 

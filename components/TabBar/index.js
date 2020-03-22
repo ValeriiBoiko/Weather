@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 60,
         justifyContent: 'space-around',
-        backgroundColor: Color.TAB_BAR
+        backgroundColor: Color.TAB_BAR,
     },
     tab: {
 

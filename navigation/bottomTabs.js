@@ -1,3 +1,5 @@
+import { Color } from "../constants";
+
 export const bottomTabsConfig = (sources = []) => {
     if (sources.length === 0) {
         sources = [
@@ -15,7 +17,8 @@ export const bottomTabsConfig = (sources = []) => {
                     options: {
                         bottomTab: {
                             icon: sources[0],
-                            text: 'Today'
+                            text: 'Today',
+                            selectedIconColor: Color.BLUE
                         },
                         bottomTabs: {
                             drawBehind: true
@@ -30,7 +33,8 @@ export const bottomTabsConfig = (sources = []) => {
                     options: {
                         bottomTab: {
                             icon: sources[1],
-                            text: 'Weekly'
+                            text: 'Weekly',
+                            selectedIconColor: Color.BLUE
                         },
                         bottomTabs: {
                             drawBehind: true
@@ -45,7 +49,8 @@ export const bottomTabsConfig = (sources = []) => {
                     options: {
                         bottomTab: {
                             icon: sources[1],
-                            text: 'Share'
+                            text: 'Share',
+                            selectedIconColor: Color.BLUE
                         },
                         bottomTabs: {
                             drawBehind: true
