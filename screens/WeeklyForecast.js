@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, View, Text, StatusBar, Platform, ActivityIndi
 import { Color, Action } from '../constants';
 import { connect } from 'react-redux';
 
+import { fetchWeatherData } from '../utils/api';
 import RNLocation from 'react-native-location';
 import TabBar from '../components/TabBar';
 import { bottomTabsConfig } from '../navigation/bottomTabs';
@@ -10,6 +11,7 @@ import { common } from '../styles/common';
 import { heightPercentageToDP } from '../utils/units';
 import WeatherDisplay from '../components/WeatherDisplay';
 import DailyShortForecast from '../components/DaillyLineForecast';
+import { getDayName } from '../utils';
 
 class WeeklyForecast extends React.Component {
 
@@ -22,24 +24,9 @@ class WeeklyForecast extends React.Component {
   }
 
   render() {
-    RNLocation.configure({
-      distanceFilter: 1000
+    let dailyForecast = Object.values(this.props.weather) .map(item => {
+      return <DailyShortForecast key={item.date} style={styles.dailyForecast} />
     })
-
-    this.requestPermission()
-      .then(granted => {
-        if (granted) {
-          this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
-            .then(({ latitude, longitude }) => {
-              // fetchWeatherData(latitude, longitude, 'metric')
-              //   .then(data => {
-              //     this.props.updateWeather(data)
-              //   })
-              //   .catch(error => console.log(error))
-              // console.log('call')
-            })
-        }
-      });
 
     return (
       <View style={{
@@ -47,7 +34,7 @@ class WeeklyForecast extends React.Component {
       }}>
         <SafeAreaView style={{
           backgroundColor: this.props.theme.backgroundColor
-        }}/>
+        }} />
         <SafeAreaView style={{
           backgroundColor: Color.WHITE,
           flex: 1
@@ -62,8 +49,6 @@ class WeeklyForecast extends React.Component {
           <ScrollView contentContainerStyle={{
             flexGrow: 1
           }}>
-
-
             {
               this.state.availableHeight ? (
                 <View style={common.flex}>
@@ -75,11 +60,7 @@ class WeeklyForecast extends React.Component {
                   </View>
 
 
-                  <DailyShortForecast style={styles.dailyForecast}/>
-                  <DailyShortForecast style={styles.dailyForecast}/>
-                  <DailyShortForecast style={styles.dailyForecast}/>
-                  <DailyShortForecast style={styles.dailyForecast}/>
-                  <DailyShortForecast style={styles.dailyForecast}/>
+                  {dailyForecast}
                 </View>
               ) : null
             }
@@ -89,10 +70,31 @@ class WeeklyForecast extends React.Component {
         </SafeAreaView>
         <SafeAreaView style={{
           backgroundColor: Color.TAB_BAR
-        }}/>
+        }} />
         <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} />
       </View>
     )
+  }
+
+  componentDidMount() {
+    console.log('did mount');
+    RNLocation.configure({
+      distanceFilter: 1000
+    })
+
+    this.requestPermission()
+      .then(granted => {
+        if (granted) {
+          this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
+            .then(({ latitude, longitude }) => {
+              // fetchWeatherData(latitude, longitude, 'metric')
+              //   .then(data => {
+              //     this.props.updateWeather(data)
+              //   })
+              //   .catch(error => console.log(error))
+            })
+        }
+      });
   }
 
   requestPermission = async () => {
@@ -114,6 +116,7 @@ class WeeklyForecast extends React.Component {
 
     return granted;
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -128,8 +131,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  theme: state.weather.displayTheme, 
-  weather: state.weather.list
+  theme: state.weather.displayTheme,
+  weather: state.weather.data.week
 });
 
 const mapDispatchToProps = (dispatch) => ({

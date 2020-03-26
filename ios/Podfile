@@ -33,6 +33,7 @@ target 'Weather' do
   pod 'ReactNativeNavigation', :path => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
   pod 'react-native-location', :path => '../node_modules/react-native-location/react-native-location.podspec'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'

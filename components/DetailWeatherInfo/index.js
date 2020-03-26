@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-    weather: state.weather.data.list[0],
+    weather: state.weather.data.today,
     sunset: state.weather.data.sunset,
     sunrise: state.weather.data.sunrise
 })

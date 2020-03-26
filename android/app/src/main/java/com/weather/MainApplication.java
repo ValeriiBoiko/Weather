@@ -17,6 +17,7 @@ import com.reactnativenavigation.react.ReactGateway;
 
 import com.github.reactnativecommunity.location.RNLocationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 
 public class MainApplication extends NavigationApplication {
 
@@ -41,7 +42,8 @@ public class MainApplication extends NavigationApplication {
         // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
             new RNLocationPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new AsyncStoragePackage()
         );
     }
 

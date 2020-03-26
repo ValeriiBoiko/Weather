@@ -52,7 +52,7 @@ export const IconsMap = {
         color: Color.DARK_BLUE
     },
     "03d": {
-        icon: "cloud",
+        icon: "cloudy-day",
         image: Images.CLOUDY_DAY,
         color: Color.CYAN
     },
@@ -62,7 +62,7 @@ export const IconsMap = {
         color: Color.DARK_BLUE
     },
     "04d": {
-        icon: "cloud",
+        icon: "cloudy-day",
         image: Images.CLOUDY_DAY,
         color: Color.CYAN
     },

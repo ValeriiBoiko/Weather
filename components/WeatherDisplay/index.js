@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
     city: state.weather.data.city,
-    weather: state.weather.data.list[0],
+    weather: state.weather.data.today,
     theme: state.weather.displayTheme
 });
 

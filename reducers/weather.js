@@ -27,9 +27,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     if (action.type === Action.UPDATE_WEATHER) {        
-        const currentWeather = action.payload.list[0];
-        action.payload.sunrise *= 1000;
-        action.payload.sunset *= 1000;
+        const currentWeather = action.payload.today;
 
         return {
             ...state,
