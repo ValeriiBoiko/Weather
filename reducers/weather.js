@@ -2,22 +2,21 @@ import { Action, Color, IconsMap, Images } from "../constants";
 
 const initialState = {
     data: {
-            sunrise: 'n/a',
-            sunset: 'n/a',
-            city: 'n/a',
-            list: [
-                {
-                    dt: new Date(),
-                    clouds: 'n/a',
-                    temp: 'n/a',
-                    feelsLike: 'n/a',
-                    humidity: 'n/a',
-                    description: 'n/a',
-                    title: 'cloudy',
-                    wind: 'n/a',
-                    icon: '01d'
-                }
-            ]
+        sunrise: 'n/a',
+        sunset: 'n/a',
+        city: 'n/a',
+        today: {
+            dt: new Date(),
+            clouds: 'n/a',
+            temp: 'n/a',
+            feelsLike: 'n/a',
+            humidity: 'n/a',
+            description: 'n/a',
+            title: 'cloudy',
+            wind: 'n/a',
+            icon: '01d'
+        },
+        week: {}
     },
     displayTheme: {
         backgroundColor: Color.CYAN,
@@ -26,7 +25,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    if (action.type === Action.UPDATE_WEATHER) {        
+    if (action.type === Action.UPDATE_WEATHER) {
         const currentWeather = action.payload.today;
 
         return {

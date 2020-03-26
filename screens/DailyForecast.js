@@ -32,11 +32,11 @@ class DailyForecast extends React.Component {
         if (granted) {
           this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
             .then(({ latitude, longitude }) => {
-              // fetchWeatherData(latitude, longitude, 'metric')
-              //   .then(data => {
-              //     this.props.updateWeather(data)
-              //   })
-              //   .catch(error => console.log('Error in api'))
+              fetchWeatherData(latitude, longitude, 'metric')
+                .then(data => {
+                  this.props.updateWeather(data)
+                })
+                .catch(error => console.log('Error in api'))
 
             })
             .catch(error => console.log('Error in geolocation') )

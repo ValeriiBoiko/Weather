@@ -29,6 +29,8 @@ export async function fetchWeatherData(lat, lng, unit) {
                 icon: currentWeather.weather[0].icon
             };
 
+            console.log(resp.list[0].weather)
+
             normalizedJson.week = reduceWeatherData(resp.list);
 
 
@@ -44,6 +46,7 @@ export async function fetchWeatherData(lat, lng, unit) {
 function reduceWeatherData (weeklyData) {
     const resultData = {};
 
+    
     weeklyData.forEach(item => {
         let temp = parseFloat(item.main.temp.toFixed(1));
         let date = new Date((item.dt * 1000));
@@ -60,8 +63,8 @@ function reduceWeatherData (weeklyData) {
                 day: day,
                 minTemp: temp,
                 maxTemp: temp,
-                icon: item.icon,
-                title: item.description
+                icon: item.weather[0].icon,
+                title: item.weather[0].description
             }
         }
     })

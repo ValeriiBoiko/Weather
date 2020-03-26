@@ -35,36 +35,28 @@ function ReduxProvider(Component) {
 }
 
 function bootstrapNavigation() {
-    console.log(0);
     Navigation.registerComponent(`screen.DailyForecast`, () => ReduxProvider(DailyForecast), () => DailyForecast);
     Navigation.registerComponent(`screen.WeeklyForecast`, () => ReduxProvider(WeeklyForecast), () => WeeklyForecast);
-    console.log(1);
-    
-    Navigation.events().registerAppLaunchedListener(() => {
-        console.log(2);
-        Navigation.setDefaultOptions({
-            bottomTabs: {
-                visible: false,
-            }
-        })
-        
-        Promise.all([
-            Icon.getImageSource('day', 35),
-            Icon.getImageSource('week', heightDependedPixel(35)),
-        ])
-        .then((sources) => {
-            
-            console.log(3);
-                Navigation.setRoot({
-                    root: {
-                        bottomTabs: bottomTabsConfig(sources)
-                    }
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    });
-}
 
-// bootstrapNavigation();
+    Navigation.setDefaultOptions({
+        bottomTabs: {
+            visible: false,
+        }
+    })
+
+    Promise.all([
+        Icon.getImageSource('day', 35),
+        Icon.getImageSource('week', heightDependedPixel(35)),
+    ])
+        .then((sources) => {
+
+            Navigation.setRoot({
+                root: {
+                    bottomTabs: bottomTabsConfig(sources)
+                }
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}

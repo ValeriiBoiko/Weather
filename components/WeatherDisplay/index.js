@@ -6,6 +6,7 @@ import { widthDependedPixel, widthPercentageToDP, heightDependedPixel } from '..
 import { connect } from 'react-redux';
 import Icon from '../../ui/Icon/Icon';
 import { common } from '../../styles/common';
+import { titleCase } from '../../utils';
 
 class WeatherDisplay extends React.Component {
 
@@ -22,7 +23,7 @@ class WeatherDisplay extends React.Component {
                             <Text style={styles.city}>{this.props.city}</Text>
                             {this.getDate()}
                             <Text style={styles.weather}>
-                                {this.titleCase(this.props.weather.description)}
+                                {titleCase(this.props.weather.description)}
                             </Text>
                         </View>
 
@@ -48,12 +49,6 @@ class WeatherDisplay extends React.Component {
         return (
             <Text style={styles.date}>{days[date.getDay()]}, {months[date.getMonth()]} {date.getDate()}</Text>
         )
-    }
-
-    titleCase = (str) => {
-        return str.toLowerCase().split(' ').map(function (word) {
-            return (word.charAt(0).toUpperCase() + word.slice(1));
-        }).join(' ');
     }
 }
 

@@ -25,7 +25,7 @@ class WeeklyForecast extends React.Component {
 
   render() {
     let dailyForecast = Object.values(this.props.weather) .map(item => {
-      return <DailyShortForecast key={item.date} style={styles.dailyForecast} />
+      return <DailyShortForecast key={item.day} data={item} style={styles.dailyForecast} />
     })
 
     return (
@@ -87,14 +87,16 @@ class WeeklyForecast extends React.Component {
         if (granted) {
           this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
             .then(({ latitude, longitude }) => {
-              // fetchWeatherData(latitude, longitude, 'metric')
-              //   .then(data => {
-              //     this.props.updateWeather(data)
-              //   })
-              //   .catch(error => console.log(error))
+              fetchWeatherData(latitude, longitude, 'metric')
+                .then(data => {
+                  this.props.updateWeather(data)
+                })
+                .catch(error => console.log(error))
             })
+            .catch(error => console.log('Can`t get latest location'))
         }
-      });
+      })
+      .catch(error => console.log('Location permissions were not granted '));
   }
 
   requestPermission = async () => {
