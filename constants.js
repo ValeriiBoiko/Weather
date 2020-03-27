@@ -42,12 +42,12 @@ export const IconsMap = {
         color: Color.DARK_BLUE
     },
     "02d": {
-        icon: "few-clouds",
+        icon: "cloudy-day",
         image: Images.CLOUDY_DAY,
         color: Color.CYAN
     },
     "02n": {
-        icon: "cloud-night-1",
+        icon: "cloudy-night",
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
@@ -57,7 +57,7 @@ export const IconsMap = {
         color: Color.CYAN
     },
     "03n": {
-        icon: "cloud-night",
+        icon: "cloudy-night",
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
@@ -67,32 +67,32 @@ export const IconsMap = {
         color: Color.CYAN
     },
     "04n": {
-        icon: "cloud-night",
+        icon: "cloudy-night",
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
     "09d": {
-        icon: "shower-rain",
+        icon: "shower-day",
         image: Images.CLOUDY_DAY,
         color: Color.CYAN
     },
     "09n": {
-        icon: "shower-rain-night",
+        icon: "shower-night",
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
     "10d": {
-        icon: "rain-day",
+        icon: "rainy-day",
         image: Images.RAINY_DAY,
         color: Color.DIRTY_BLUE
     },
     "10n": {
-        icon: "rain-night",
+        icon: "rainy-night",
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
     "11d": {
-        icon: "thunder",
+        icon: "thunder-day",
         image: Images.RAINY_DAY,
         color: Color.DIRTY_BLUE
     },
@@ -102,17 +102,17 @@ export const IconsMap = {
         color: Color.DARK_BLUE
     },
     "13d": {
-        icon: "snow",
+        icon: "snowy-day",
         image: Images.CLOUDY_DAY,
         color: Color.DIRTY_BLUE
     },
     "13n": {
-        icon: "snow-night",
+        icon: "snowy-night",
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
     "50d": {
-        icon: "mist",
+        icon: "mist-day",
         image: Images.CLOUDY_DAY,
         color: Color.DIRTY_BLUE
     },

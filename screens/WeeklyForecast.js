@@ -44,8 +44,6 @@ class WeeklyForecast extends React.Component {
           });
         }}>
 
-          {/* <Preloader /> */}
-
           <ScrollView contentContainerStyle={{
             flexGrow: 1
           }}>

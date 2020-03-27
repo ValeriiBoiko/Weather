@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import RNImage from '../../ui/Image';
 import { Color, Font, IconsMap } from '../../constants';
 import { widthDependedPixel, widthPercentageToDP, heightDependedPixel } from '../../utils/units';
@@ -11,7 +11,6 @@ import { titleCase } from '../../utils';
 class WeatherDisplay extends React.Component {
 
     render() {
-
         return (
             <View style={styles.container}>
                 <RNImage source={this.props.theme.backgroundImage}
@@ -27,7 +26,7 @@ class WeatherDisplay extends React.Component {
                             </Text>
                         </View>
 
-                        <Icon size={widthDependedPixel(135)} name={IconsMap[this.props.weather.icon].icon} color={Color.WHITE} />
+                        <Icon size={120} name={IconsMap[this.props.weather.icon].icon} color={Color.WHITE} />
                     </View>
 
                     <View style={styles.tempContainer}>
