@@ -54,7 +54,7 @@ class WeeklyForecast extends React.Component {
                     backgroundColor: this.props.theme.backgroundColor,
                     height: heightPercentageToDP(40, this.state.availableHeight),
                   }}>
-                    <WeatherDisplay />
+                    <WeatherDisplay compact={true} />
                   </View>
 
 
@@ -85,11 +85,11 @@ class WeeklyForecast extends React.Component {
         if (granted) {
           this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
             .then(({ latitude, longitude }) => {
-              fetchWeatherData(latitude, longitude, 'metric')
-                .then(data => {
-                  this.props.updateWeather(data)
-                })
-                .catch(error => console.log(error))
+              // fetchWeatherData(latitude, longitude, 'metric')
+              //   .then(data => {
+              //     this.props.updateWeather(data)
+              //   })
+              //   .catch(error => console.log(error))
             })
             .catch(error => console.log('Can`t get latest location'))
         }
