@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { SafeAreaView, ScrollView, View, Text, StatusBar, Platform, ActivityIndicator, Dimensions } from 'react-native';
+import { SafeAreaView, ScrollView, View, StatusBar } from 'react-native';
 import { Color, Action } from '../constants';
-import { widthPercentageToDP, heightPercentageToDP } from '../utils/units';
+import { heightPercentageToDP } from '../utils/units';
 import { connect } from 'react-redux';
 import WeatherDisplay from '../components/WeatherDisplay';
 
@@ -10,7 +10,6 @@ import { fetchWeatherData } from '../utils/api';
 import DetailWeatherInfo from '../components/DetailWeatherInfo';
 import TabBar from '../components/TabBar';
 import { bottomTabsConfig } from '../navigation/bottomTabs';
-import { Navigation } from 'react-native-navigation';
 
 class DailyForecast extends React.Component {
 
@@ -22,7 +21,7 @@ class DailyForecast extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     RNLocation.configure({
       distanceFilter: 1000
     })
@@ -32,37 +31,33 @@ class DailyForecast extends React.Component {
         if (granted) {
           this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
             .then(({ latitude, longitude }) => {
-              // fetchWeatherData(latitude, longitude, 'metric')
-              //   .then(data => {
-              //     this.props.updateWeather(data)
-              //   })
-              //   .catch(error => console.log('Error in api'))
-
+              fetchWeatherData(latitude, longitude, 'metric')
+                .then(data => {
+                  this.props.updateWeather(data)
+                })
+                .catch(error => console.log('Error in api'))
             })
-            .catch(error => console.log('Error in geolocation') )
+            .catch(error => console.log('Error in geolocation'))
         }
       });
   }
 
   render() {
-    
+
 
     return (
       <Fragment>
         <SafeAreaView backgroundColor={this.props.theme.backgroundColor} />
         <SafeAreaView style={{
           backgroundColor: Color.TAB_BAR,
-          flex: 1
+          flex: 1,
         }} onLayout={(e) => {
           this.setState({
             availableHeight: e.nativeEvent.layout.height
           });
         }}>
-
-          {/* <Preloader /> */}
-
           <ScrollView contentContainerStyle={{
-            flexGrow: 1
+            flexGrow: 1,
           }}>
 
             {
@@ -73,7 +68,7 @@ class DailyForecast extends React.Component {
                   <View style={{
                     backgroundColor: this.props.theme.backgroundColor,
                     height: heightPercentageToDP(63, this.state.availableHeight),
-                    overflow: 'hidden',
+                    overflow: 'hidden'
                   }}>
                     <WeatherDisplay />
 
@@ -85,7 +80,7 @@ class DailyForecast extends React.Component {
 
           </ScrollView>
           <TabBar config={bottomTabsConfig()} />
-        <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} />
+          <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} />
         </SafeAreaView>
       </Fragment>
     )

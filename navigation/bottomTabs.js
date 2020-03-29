@@ -4,7 +4,8 @@ export const bottomTabsConfig = (sources = []) => {
     if (sources.length === 0) {
         sources = [
             'day',
-            'week'
+            'week',
+            'settings'
         ]
     }
 
@@ -45,11 +46,11 @@ export const bottomTabsConfig = (sources = []) => {
             {
                 component: {
                     id: "screen.Share",
-                    name: "screen.WeeklyForecast",
+                    name: "screen.Settings",
                     options: {
                         bottomTab: {
-                            icon: sources[1],
-                            text: 'Share',
+                            icon: sources[2],
+                            text: 'Settings',
                             selectedIconColor: Color.BLUE
                         },
                         bottomTabs: {

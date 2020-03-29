@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { SafeAreaView, ScrollView, View, Text, StatusBar, Platform, ActivityIndicator, Dimensions, StyleSheet } from 'react-native';
+import React from 'react';
+import { SafeAreaView, ScrollView, View, StatusBar, StyleSheet } from 'react-native';
 import { Color, Action } from '../constants';
 import { connect } from 'react-redux';
 
@@ -11,7 +11,6 @@ import { common } from '../styles/common';
 import { heightPercentageToDP } from '../utils/units';
 import WeatherDisplay from '../components/WeatherDisplay';
 import DailyShortForecast from '../components/DaillyLineForecast';
-import { getDayName } from '../utils';
 
 class WeeklyForecast extends React.Component {
 
@@ -85,11 +84,11 @@ class WeeklyForecast extends React.Component {
         if (granted) {
           this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
             .then(({ latitude, longitude }) => {
-              // fetchWeatherData(latitude, longitude, 'metric')
-              //   .then(data => {
-              //     this.props.updateWeather(data)
-              //   })
-              //   .catch(error => console.log(error))
+              fetchWeatherData(latitude, longitude, 'metric')
+                .then(data => {
+                  this.props.updateWeather(data)
+                })
+                .catch(error => console.log(error))
             })
             .catch(error => console.log('Can`t get latest location'))
         }

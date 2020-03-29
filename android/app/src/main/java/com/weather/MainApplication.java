@@ -18,6 +18,7 @@ import com.reactnativenavigation.react.ReactGateway;
 import com.github.reactnativecommunity.location.RNLocationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.airbnb.android.react.maps.MapsPackage;
 
 public class MainApplication extends NavigationApplication {
 
@@ -43,7 +44,8 @@ public class MainApplication extends NavigationApplication {
         return Arrays.<ReactPackage>asList(
             new RNLocationPackage(),
             new VectorIconsPackage(),
-            new AsyncStoragePackage()
+            new AsyncStoragePackage(),
+            new MapsPackage()
         );
     }
 

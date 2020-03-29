@@ -14,6 +14,7 @@ import { heightDependedPixel } from './utils/units';
 import { bottomTabsConfig } from './navigation/bottomTabs';
 import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
+import Settings from './screens/Settings';
 
 let persistConfig = {
     key: 'root',
@@ -37,6 +38,7 @@ function ReduxProvider(Component) {
 function bootstrapNavigation() {
     Navigation.registerComponent(`screen.DailyForecast`, () => ReduxProvider(DailyForecast), () => DailyForecast);
     Navigation.registerComponent(`screen.WeeklyForecast`, () => ReduxProvider(WeeklyForecast), () => WeeklyForecast);
+    Navigation.registerComponent(`screen.Settings`, () => ReduxProvider(Settings), () => Settings);
 
     Navigation.setDefaultOptions({
         bottomTabs: {
@@ -45,8 +47,9 @@ function bootstrapNavigation() {
     })
 
     Promise.all([
-        Icon.getImageSource('day', 35),
+        Icon.getImageSource('day', heightDependedPixel(35)),
         Icon.getImageSource('week', heightDependedPixel(35)),
+        Icon.getImageSource('settings', heightDependedPixel(35)),
     ])
         .then((sources) => {
 

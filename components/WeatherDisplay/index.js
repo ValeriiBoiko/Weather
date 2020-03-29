@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Platform, PixelRatio, Dimensions } from 'react-native';
 import RNImage from '../../ui/Image';
 import { Color, Font, IconsMap } from '../../constants';
-import { widthDependedPixel, widthPercentageToDP, heightDependedPixel } from '../../utils/units';
+import { widthDependedPixel, widthPercentageToDP, heightDependedPixel, calcWidth } from '../../utils/units';
 import { connect } from 'react-redux';
 import Icon from '../../ui/Icon/Icon';
 import { common } from '../../styles/common';
@@ -11,33 +11,32 @@ import { titleCase } from '../../utils';
 class WeatherDisplay extends React.Component {
 
     render() {
-        const coef = this.props.compact ? 0.9 : 1;
+        const scale = this.props.compact ? 0.8 : 1;
         const styleProps = {
-            coef: coef
+            scale: scale,
         }
-
+ 
         return (
-            <View style={styles(styleProps).container}>
+            <View style={styles.container}>
                 <RNImage source={this.props.theme.backgroundImage}
-                    style={styles(styleProps).image} />
-
-                <View style={styles(styleProps).content}>
-                    <View style={styles(styleProps).info}>
-                        <View>
-                            <Text style={styles(styleProps).city}>{this.props.city}</Text>
-                            {this.getDate()}
-                            <Text style={styles(styleProps).weather}>
+                    style={styles.image} />
+                <View style={styles.content}>
+                    <View style={styles.info}>
+                        <View style={common.flex}>
+                            <Text style={styles.city}>{this.props.city}</Text>
+                            { this.props.compact ? null : this.getDate() }
+                            <Text style={styles.weather}>
                                 {titleCase(this.props.weather.description)}
                             </Text>
                         </View>
 
-                        <Icon size={widthDependedPixel(120 * coef)} name={IconsMap[this.props.weather.icon].icon} color={Color.WHITE} />
+                        <Icon size={widthDependedPixel(120) * scale} name={IconsMap[this.props.weather.icon].icon} color={Color.WHITE} />
                     </View>
 
-                    <View style={styles(styleProps).tempContainer}>
+                    <View style={styles.tempContainer}>
                         <View style={common.row}>
-                            <Text style={styles(styleProps).temperature}>{Math.round(this.props.weather.temp) || null}</Text>
-                            <Text style={styles(styleProps).unit}>°C</Text>
+                            <Text style={dynamicStyles(styleProps).temperature}>{Math.round(this.props.weather.temp) || null}</Text>
+                            <Text style={dynamicStyles(styleProps).unit}>°C</Text>
                         </View>
                     </View>
                 </View>
@@ -51,14 +50,12 @@ class WeatherDisplay extends React.Component {
         const date = ms ? new Date(ms) : new Date();
 
         return (
-            <Text style={styles({
-                coef: this.props.compact ? 0.85 : 1
-            }).date}>{days[date.getDay()]}, {months[date.getMonth()]} {date.getDate()}</Text>
+            <Text style={styles.date}>{days[date.getDay()]}, {months[date.getMonth()]} {date.getDate()}</Text>
         )
     }
 }
 
-const styles = (props = {}) => StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
@@ -76,7 +73,8 @@ const styles = (props = {}) => StyleSheet.create({
         flex: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        minHeight: widthDependedPixel(125)
     },
     city: {
         flexWrap: 'wrap',
@@ -86,32 +84,36 @@ const styles = (props = {}) => StyleSheet.create({
         fontFamily: Font.QUICKSAND_REGULAR
     },
     date: {
-        color: Color.WHITE,
-        fontSize: widthDependedPixel(14),
+        paddingBottom: heightDependedPixel(8),
+        fontFamily: Font.QUICKSAND_REGULAR,
         lineHeight: widthDependedPixel(20),
-        fontFamily: Font.QUICKSAND_REGULAR
+        fontSize: widthDependedPixel(15),
+        color: Color.WHITE,
     },
     weather: {
         color: Color.WHITE,
         fontSize: widthDependedPixel(16),
         lineHeight: widthDependedPixel(16),
-        paddingTop: heightDependedPixel(17.5),
+        paddingTop: heightDependedPixel(8),
         fontFamily: Font.QUICKSAND_SEMIBOLD
     },
     tempContainer: {
         justifyContent: 'flex-end',
         flex: 1
-    },
+    }
+})
+
+const dynamicStyles = (props = {}) => StyleSheet.create({
     temperature: {
         color: Color.WHITE,
-        fontSize: widthDependedPixel(75) * props.coef,
+        fontSize: widthDependedPixel(75) * (props.scale || 1),
         fontFamily: Font.QUICKSAND_MEDIUM,
-        lineHeight: widthDependedPixel(75) * props.coef
+        lineHeight: widthDependedPixel(75) * (props.scale || 1)
     },
     unit: {
         color: Color.WHITE,
-        fontSize: widthDependedPixel(35) * props.coef,
-        lineHeight: widthDependedPixel(35) * props.coef,
+        fontSize: widthDependedPixel(35) * (props.scale || 1),
+        lineHeight: widthDependedPixel(35) * (props.scale || 1),
         fontFamily: Font.QUICKSAND_SEMIBOLD
     }
 })
