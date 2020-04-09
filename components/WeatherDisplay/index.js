@@ -119,9 +119,9 @@ const dynamicStyles = (props = {}) => StyleSheet.create({
 })
 
 const mapStateToProps = (state, props) => ({
-    city: state.weather.data.city,
-    weather: state.weather.data.today,
-    theme: state.weather.displayTheme,
+    city: state.weather.city,
+    weather: state.weather.today,
+    theme: state.displayTheme,
     compact: props.compact === null ? false : props.compact
 });
 

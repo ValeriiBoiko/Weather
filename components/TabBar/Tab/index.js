@@ -4,40 +4,35 @@ import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 import Tab from './Tab';
 
-class TabContainer extends React.Component {
+function TabContainer(props) {
+    Navigation.events().registerComponentDidAppearListener(({ componentId, componentName, passProps }) => {
+        props.setScreen(componentId)
+    });
 
-    constructor(props) {
-        super(props);
-        this.screenEventListener = Navigation.events().registerComponentDidAppearListener(({ componentId, componentName, passProps }) => {
-            this.props.setScreen(componentId)
-        });
-
-        this.openTab = this.openTab.bind(this);
+    const openTab = () => {
+        if (props.component !== props.currentScreen) {
+            Navigation.mergeOptions(props.component, {
+                bottomTabs: {
+                    currentTabIndex: props.index
+                }
+            });
+        }
     }
 
-    render() {
-        return (
-            <Tab onPress={ this.openTab } {...this.props}/>
-        )
-    }
-
-    openTab() {
-        Navigation.mergeOptions(this.props.component, {
-            bottomTabs: {
-                currentTabIndex: this.props.index
-            }
-        });
-    }
+    return (
+        <Tab onPress={openTab} {...props} 
+            active={props.component === props.currentScreen} />
+    )
 }
 
 const mapStateToProps = (state) => ({
-    currentScreen: state.app.currentScreen,
+    currentScreen: state.currentScreen,
 });
 
 const mapDispatchToScreen = (dispatch) => ({
     setScreen: (screen) => dispatch({
         type: Action.SET_SCREEN,
-        screenComponent: screen
+        payload: screen
     })
 })
 

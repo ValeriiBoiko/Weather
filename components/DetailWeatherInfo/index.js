@@ -4,9 +4,12 @@ import Item from './Item';
 import { widthDependedPixel, widthPercentageToDP } from '../../utils/units';
 import { Color } from '../../constants';
 import { connect } from 'react-redux';
+import data from '../../localization.json';
 
 class DetailWeatherInfo extends React.Component {
+
     render() {
+
         let sunrise = this.props.sunrise;
         let sunset = this.props.sunset;
 
@@ -16,6 +19,7 @@ class DetailWeatherInfo extends React.Component {
             const minutes = sunrise.getMinutes();
             sunrise = `${hour}:${minutes}`;
         }
+
 
         if (Number.isInteger(sunset)) {
             sunset = new Date(sunset);
@@ -32,19 +36,19 @@ class DetailWeatherInfo extends React.Component {
                 <Item style={styles.item} 
                     name={'temp'} color={'#999'} 
                     size={widthDependedPixel(75)}
-                    title={'Feels like'} value={this.props.weather.temp + ' °C'}/>
+                    title={data.phrase.feelsLike[this.props.lang]} value={this.props.weather.temp + ' °C'}/>
                 <Item style={styles.item} 
                     name={'wind'} color={'#999'} 
                     size={widthDependedPixel(75)}
-                    title={'Wind'} value={this.props.weather.wind +  ' km/h'} />
+                    title={data.phrase.wind[this.props.lang]} value={this.props.weather.wind +  ' km/h'} />
                 <Item style={styles.item} 
                     name={'sunrise'} color={'#999'} 
                     size={widthDependedPixel(75)}
-                    title={'Sunrise'} value={sunrise} />
+                    title={data.phrase.sunrise[this.props.lang]} value={sunrise} />
                 <Item style={styles.item} 
                     name={'sunset'} color={'#999'} 
                     size={widthDependedPixel(75)}
-                    title={'Sunset'} value={sunset} />
+                    title={data.phrase.sunset[this.props.lang]} value={sunset} />
             </View>
         )
     }
@@ -64,9 +68,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-    weather: state.weather.data.today,
-    sunset: state.weather.data.sunset,
-    sunrise: state.weather.data.sunrise
+    weather: state.weather.today,
+    sunset: state.weather.sunset,
+    sunrise: state.weather.sunrise,
+    lang: state.lang
 })
 
 export default connect(mapStateToProps)(DetailWeatherInfo);

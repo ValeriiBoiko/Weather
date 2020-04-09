@@ -1,7 +1,14 @@
-export const getDayName = (index) => {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+import { Platform } from "react-native";
 
-    return days[index];
+export const getDayName = (index, lang = "en") => {
+    console.log(lang); 
+
+    const days = {
+        "en": ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        "ru": ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+    };
+
+    return days[lang][index];
 }
 
 export const titleCase = (str) => {
@@ -9,3 +16,5 @@ export const titleCase = (str) => {
         return (word.charAt(0).toUpperCase() + word.slice(1));
     }).join(' ');
 }
+
+export const isAndroid = Platform.OS === 'android'

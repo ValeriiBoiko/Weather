@@ -6,10 +6,11 @@ import { connect } from 'react-redux';
 import WeatherDisplay from '../components/WeatherDisplay';
 
 import RNLocation from 'react-native-location';
-import { fetchWeatherData } from '../utils/api';
+import { APIHelper } from '../utils/api';
 import DetailWeatherInfo from '../components/DetailWeatherInfo';
 import TabBar from '../components/TabBar';
 import { bottomTabsConfig } from '../navigation/bottomTabs';
+import { updateWeatherAction } from '../action';
 
 class DailyForecast extends React.Component {
 
@@ -31,11 +32,11 @@ class DailyForecast extends React.Component {
         if (granted) {
           this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
             .then(({ latitude, longitude }) => {
-              fetchWeatherData(latitude, longitude, 'metric')
-                .then(data => {
-                  this.props.updateWeather(data)
-                })
-                .catch(error => console.log('Error in api'))
+              // APIHelper.fetchWeatherData(latitude, longitude, 'metric')
+              //   .then(data => {
+              //     this.props.updateWeather(data)
+              //   })
+              //   .catch(error => console.log(error))
             })
             .catch(error => console.log('Error in geolocation'))
         }
@@ -108,16 +109,11 @@ class DailyForecast extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  theme: state.weather.displayTheme
+  theme: state.displayTheme
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateWeather: (data) => {
-    dispatch({
-      type: Action.UPDATE_WEATHER,
-      payload: data
-    })
-  }
+  updateWeather: data => dispatch(updateWeatherAction(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DailyForecast);

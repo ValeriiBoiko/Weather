@@ -1,34 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Color } from '../../constants';
-import Icon from '../../ui/Icon/Icon';
-import { Navigation } from 'react-native-navigation';
 import Tab from './Tab';
 
-class TabBar extends React.Component {
+function TabBar(props) {
+    const tabs = props.config.children.map((tab, index) => (
+        <Tab style={styles.tab} key={tab.component.id} component={tab.component.id}
+            index={index} options={tab.component.options.bottomTab} />
+    ));
 
-    constructor(props) {
-        super(props);
-
-        this.tabs = props.config.children;
-        this.options = props.config.options
-    }
-
-    render() {
-        const tabs = this.tabs.map((tab, index) => (
-            <Tab style={styles.tab} key={tab.component.id} component={tab.component.id} 
-                index={index} options={tab.component.options.bottomTab}/>
-        ))
-
-        return (
-            <View style={[
-                this.props.style,
-                styles.container
-            ]}>
-                {tabs}
-            </View>
-        )   
-    }
+    return (
+        <View style={[
+            props.style,
+            styles.container
+        ]}>
+            {tabs}
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -37,9 +25,6 @@ const styles = StyleSheet.create({
         height: 60,
         justifyContent: 'space-around',
         backgroundColor: Color.TAB_BAR,
-    },
-    tab: {
-
     }
 });
 

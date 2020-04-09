@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, View, StatusBar, StyleSheet } from 'react-nat
 import { Color, Action } from '../constants';
 import { connect } from 'react-redux';
 
-import { fetchWeatherData } from '../utils/api';
+import { APIHelper } from '../utils/api';
 import RNLocation from 'react-native-location';
 import TabBar from '../components/TabBar';
 import { bottomTabsConfig } from '../navigation/bottomTabs';
@@ -11,6 +11,7 @@ import { common } from '../styles/common';
 import { heightPercentageToDP } from '../utils/units';
 import WeatherDisplay from '../components/WeatherDisplay';
 import DailyShortForecast from '../components/DaillyLineForecast';
+import { updateWeatherAction } from '../action';
 
 class WeeklyForecast extends React.Component {
 
@@ -23,7 +24,7 @@ class WeeklyForecast extends React.Component {
   }
 
   render() {
-    let dailyForecast = Object.values(this.props.weather) .map(item => {
+    let dailyForecast = Object.values(this.props.weather).map(item => {
       return <DailyShortForecast key={item.day} data={item} style={styles.dailyForecast} />
     })
 
@@ -53,7 +54,7 @@ class WeeklyForecast extends React.Component {
                     backgroundColor: this.props.theme.backgroundColor,
                     height: heightPercentageToDP(40, this.state.availableHeight),
                   }}>
-                    <WeatherDisplay compact={true} />
+                     <WeatherDisplay compact={true} /> 
                   </View>
 
 
@@ -68,13 +69,12 @@ class WeeklyForecast extends React.Component {
         <SafeAreaView style={{
           backgroundColor: Color.TAB_BAR
         }} />
-        <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} />
+        <StatusBar barStyle={'light-content'}  />
       </View>
     )
   }
 
   componentDidMount() {
-    console.log('did mount');
     RNLocation.configure({
       distanceFilter: 1000
     })
@@ -84,11 +84,11 @@ class WeeklyForecast extends React.Component {
         if (granted) {
           this.latestLocation = RNLocation.getLatestLocation({ timeout: 5000 })
             .then(({ latitude, longitude }) => {
-              fetchWeatherData(latitude, longitude, 'metric')
-                .then(data => {
-                  this.props.updateWeather(data)
-                })
-                .catch(error => console.log(error))
+              // APIHelper.fetchWeatherData(latitude, longitude, 'metric', this.props.lang)
+              //   .then(data => {
+              //     this.props.updateWeather(data)
+              //   })
+              //   .catch(error => console.log('API Error'))
             })
             .catch(error => console.log('Can`t get latest location'))
         }
@@ -129,18 +129,16 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (state) => ({
-  theme: state.weather.displayTheme,
-  weather: state.weather.data.week
-});
+const mapStateToProps = (state) => {
+  return {
+    theme: state.displayTheme,
+    weather: state.weather.week,
+    lang: state.lang
+  }
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  updateWeather: (data) => {
-    dispatch({
-      type: Action.UPDATE_WEATHER,
-      payload: data
-    })
-  }
+  updateWeather: data => dispatch(updateWeatherAction(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeeklyForecast);

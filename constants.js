@@ -9,6 +9,12 @@ export const Color = {
     BLACK: "#333"
 }
 
+export const GeoSource = {
+    GPS: 'GPS',
+    IP: 'IP',
+    STATIC: 'STATIC',
+}
+
 export const Font = {
     QUICKSAND_BOLD: 'Quicksand-Bold',
     QUICKSAND_LIGHT: 'Quicksand-Light',
@@ -20,7 +26,10 @@ export const Font = {
 export const Action = {
     UPDATE_WEATHER: "UPDATE_WEATHER",
     UPDATE_LOCATION: "UPDATE_LOCATION",
-    SET_SCREEN: 'SET_SCREEN'
+    SET_SCREEN: 'SET_SCREEN',
+    UPDATE_LOCATION_USAGE: 'UPDATE_LOCATION_USAGE',
+    UPDATE_UNIT_SYSTEM: 'UPDATE_UNIT_SYSTEM',
+    UPDATE_LOCATION_SOURCE: 'UPDATE_LOCATION_SOURCE',
 }
 
 export const Images = {

@@ -18,5 +18,11 @@ export const common = StyleSheet.create({
         fontSize: widthDependedPixel(14),
         lineHeight: widthDependedPixel(14),
         fontFamily: Font.QUICKSAND_REGULAR
+    },
+    largerText: {
+        color: Color.BLACK,
+        fontSize: widthDependedPixel(16),
+        lineHeight: widthDependedPixel(20),
+        fontFamily: Font.QUICKSAND_REGULAR
     }
 }) 

@@ -1,32 +1,31 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Color, Font } from '../../../constants';
 import Icon from '../../../ui/Icon/Icon';
 import { common } from '../../../styles/common';
 import { heightDependedPixel } from '../../../utils/units';
+import Touchable from '../../../ui/Touchable';
 
-class Tab extends React.Component {
-    render() {
-        let iconStyle = {};
-        let labelStyle = {};
+function Tab(props) {
+    let iconStyle = {};
+    let labelStyle = {};
 
-        if (this.props.currentScreen === this.props.component 
-            && this.props.options.selectedIconColor) {
-            iconStyle.color = this.props.options.selectedIconColor;
-            labelStyle.color = this.props.options.selectedIconColor;
-        }
-
-        return (
-            <TouchableHighlight onPress={this.props.onPress} style={common.flex}>
-                <View style={[styles.tab, this.props.style]} >
-                    <Icon style={[this.props.defaultStyle, styles.icon, iconStyle]}
-                        name={this.props.options.icon} size={35}
-                        color={Color.DARK_BLUE} />
-                    <Text style={[styles.label, labelStyle]}>{this.props.options.text}</Text>
-                </View>
-            </TouchableHighlight>
-        )
+    if (props.active && props.options.selectedIconColor) {
+        iconStyle.color = props.options.selectedIconColor;
+        labelStyle.color = props.options.selectedIconColor;
     }
+
+    return (
+        <Touchable onPress={props.onPress} style={common.flex}>
+            <View style={[styles.tab, props.style]} >
+                <Icon style={[props.defaultStyle, styles.icon, iconStyle]}
+                    name={props.options.icon} size={35}
+                    color={Color.DARK_BLUE} />
+                <Text style={[styles.label, labelStyle]}>{props.options.text}</Text>
+            </View>
+        </Touchable>
+    )
+
 }
 
 const styles = StyleSheet.create({
