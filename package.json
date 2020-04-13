@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.8.1",
     "axios": "^0.19.2",
+    "pretty-format": "^25.3.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-location": "^2.5.0",
@@ -21,7 +22,8 @@
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

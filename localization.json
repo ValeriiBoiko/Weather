@@ -1,0 +1,80 @@
+{
+    "units": {
+        "metric": {
+            "en": "Metric",
+            "ru": "Метрическая" 
+        },
+        "imperial": {
+            "en": "Imperial",
+            "ru": "Империческая"
+        }
+    },
+    "location": {
+        "gps": {
+            "en": "GPS",
+            "ru": "GPS"
+        },
+        "ip": {
+            "en": "IP Address",
+            "ru": "IP Адрес"
+        },
+        "static": {
+            "en": "Manually",
+            "ru": "Вручную"
+        }
+    },
+    "language": {
+        "ru": {
+            "en": "English",
+            "ru": "Русский"
+        },
+        "en": {
+            "en": "English",
+            "ru": "Русский"
+        }
+    },
+    "theme": {
+        "dark": {
+            "ru": "Темная",
+            "en": "Dark"
+        },
+        "light": {
+            "ru": "Светлая",
+            "en": "Light"
+        }
+    },
+    "phrase": {
+        "feelsLike": {
+            "ru": "Ощущается",
+            "en": "Feels like"
+        },
+        "wind": {
+            "ru": "Ветер",
+            "en": "Wind"
+        },
+        "sunrise": {
+            "ru": "Восход",
+            "en": "Sunrise"
+        },
+        "sunset": {
+            "ru": "Закат",
+            "en": "Sunset"
+        },
+        "unitsFormat": {
+            "ru": "Система измерения",
+            "en": "Units format"
+        },
+        "locationSource": {
+            "ru": "Источник геолокации",
+            "en": "Location source"
+        },
+        "languagelabel": {
+            "ru": "Желаемый язык",
+            "en": "Preferable language"
+        },
+        "themeLabel": {
+            "ru": "Цвет темы",
+            "en": "Color mode"
+        }
+    }
+}

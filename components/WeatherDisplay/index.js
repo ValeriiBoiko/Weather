@@ -80,21 +80,21 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         color: Color.WHITE,
         fontSize: widthDependedPixel(24),
-        lineHeight: widthDependedPixel(24),
+        lineHeight: widthDependedPixel(30),
         fontFamily: Font.QUICKSAND_REGULAR
     },
     date: {
         paddingBottom: heightDependedPixel(8),
         fontFamily: Font.QUICKSAND_REGULAR,
-        lineHeight: widthDependedPixel(20),
+        lineHeight: widthDependedPixel(19),
         fontSize: widthDependedPixel(15),
         color: Color.WHITE,
     },
     weather: {
         color: Color.WHITE,
         fontSize: widthDependedPixel(16),
-        lineHeight: widthDependedPixel(16),
-        paddingTop: heightDependedPixel(8),
+        lineHeight: widthDependedPixel(20),
+        paddingTop: heightDependedPixel(4),
         fontFamily: Font.QUICKSAND_SEMIBOLD
     },
     tempContainer: {
@@ -108,12 +108,12 @@ const dynamicStyles = (props = {}) => StyleSheet.create({
         color: Color.WHITE,
         fontSize: widthDependedPixel(75) * (props.scale || 1),
         fontFamily: Font.QUICKSAND_MEDIUM,
-        lineHeight: widthDependedPixel(75) * (props.scale || 1)
+        lineHeight: widthDependedPixel(100) * (props.scale || 1)
     },
     unit: {
         color: Color.WHITE,
         fontSize: widthDependedPixel(35) * (props.scale || 1),
-        lineHeight: widthDependedPixel(35) * (props.scale || 1),
+        lineHeight: widthDependedPixel(43) * (props.scale || 1),
         fontFamily: Font.QUICKSAND_SEMIBOLD
     }
 })

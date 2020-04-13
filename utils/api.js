@@ -69,7 +69,7 @@ export class APIHelper {
 
     }
 
-    _reduceWeatherData (weeklyData, lang) {
+    static _reduceWeatherData (weeklyData, lang) {
         const resultData = {};
     
         

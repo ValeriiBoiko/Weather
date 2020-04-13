@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* WeatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WeatherTests.m */; };
-		046FC6C92414EC53008966C5 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046FC6C42414EC53008966C5 /* Quicksand-Medium.ttf */; };
-		046FC6CA2414EC53008966C5 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046FC6C52414EC53008966C5 /* Quicksand-Bold.ttf */; };
-		046FC6CB2414EC53008966C5 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046FC6C62414EC53008966C5 /* Quicksand-Regular.ttf */; };
-		046FC6CC2414EC53008966C5 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046FC6C72414EC53008966C5 /* Quicksand-SemiBold.ttf */; };
-		046FC6CD2414EC53008966C5 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046FC6C82414EC53008966C5 /* Quicksand-Light.ttf */; };
+		0436ED8824418721004D43BB /* Comfortaa-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0436ED8324418720004D43BB /* Comfortaa-Medium.ttf */; };
+		0436ED8924418721004D43BB /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0436ED8424418720004D43BB /* Comfortaa-SemiBold.ttf */; };
+		0436ED8A24418721004D43BB /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0436ED8524418720004D43BB /* Comfortaa-Bold.ttf */; };
+		0436ED8B24418721004D43BB /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0436ED8624418721004D43BB /* Comfortaa-Light.ttf */; };
+		0436ED8C24418721004D43BB /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0436ED8724418721004D43BB /* Comfortaa-Regular.ttf */; };
 		0472CC2C24168275007F93D4 /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0472CC2B24168275007F93D4 /* fontello.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
@@ -51,11 +51,11 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* WeatherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherTests.m; sourceTree = "<group>"; };
 		01C1AE7C93E0FBB991214638 /* libPods-WeatherTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		046FC6C42414EC53008966C5 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
-		046FC6C52414EC53008966C5 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
-		046FC6C62414EC53008966C5 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
-		046FC6C72414EC53008966C5 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
-		046FC6C82414EC53008966C5 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.ttf"; sourceTree = "<group>"; };
+		0436ED8324418720004D43BB /* Comfortaa-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Medium.ttf"; sourceTree = "<group>"; };
+		0436ED8424418720004D43BB /* Comfortaa-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-SemiBold.ttf"; sourceTree = "<group>"; };
+		0436ED8524418720004D43BB /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
+		0436ED8624418721004D43BB /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
+		0436ED8724418721004D43BB /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		0472CC2B24168275007F93D4 /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Weather/AppDelegate.h; sourceTree = "<group>"; };
@@ -137,12 +137,12 @@
 		046FC6C32414EC2B008966C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				046FC6C52414EC53008966C5 /* Quicksand-Bold.ttf */,
-				046FC6C82414EC53008966C5 /* Quicksand-Light.ttf */,
-				046FC6C42414EC53008966C5 /* Quicksand-Medium.ttf */,
+				0436ED8524418720004D43BB /* Comfortaa-Bold.ttf */,
+				0436ED8624418721004D43BB /* Comfortaa-Light.ttf */,
+				0436ED8324418720004D43BB /* Comfortaa-Medium.ttf */,
+				0436ED8724418721004D43BB /* Comfortaa-Regular.ttf */,
+				0436ED8424418720004D43BB /* Comfortaa-SemiBold.ttf */,
 				0472CC2B24168275007F93D4 /* fontello.ttf */,
-				046FC6C62414EC53008966C5 /* Quicksand-Regular.ttf */,
-				046FC6C72414EC53008966C5 /* Quicksand-SemiBold.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -362,14 +362,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0436ED8924418721004D43BB /* Comfortaa-SemiBold.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				0436ED8A24418721004D43BB /* Comfortaa-Bold.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				046FC6C92414EC53008966C5 /* Quicksand-Medium.ttf in Resources */,
+				0436ED8C24418721004D43BB /* Comfortaa-Regular.ttf in Resources */,
+				0436ED8B24418721004D43BB /* Comfortaa-Light.ttf in Resources */,
+				0436ED8824418721004D43BB /* Comfortaa-Medium.ttf in Resources */,
 				0472CC2C24168275007F93D4 /* fontello.ttf in Resources */,
-				046FC6CD2414EC53008966C5 /* Quicksand-Light.ttf in Resources */,
-				046FC6CC2414EC53008966C5 /* Quicksand-SemiBold.ttf in Resources */,
-				046FC6CA2414EC53008966C5 /* Quicksand-Bold.ttf in Resources */,
-				046FC6CB2414EC53008966C5 /* Quicksand-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

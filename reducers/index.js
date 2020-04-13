@@ -28,7 +28,7 @@ const initialState = {
         backgroundColor: Color.CYAN,
         backgroundImage: Images.CLOUDY_DAY
     },
-    lang: 'ru'
+    lang: 'en'
 }
 
 export default (state = initialState, action) => {
@@ -67,6 +67,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 locationSource: action.payload
+            }
+        case Action.SET_LOCATION :
+            return {
+                ...state,
+                ...action.payload
             }
     }
 

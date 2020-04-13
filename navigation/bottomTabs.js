@@ -23,7 +23,12 @@ export const bottomTabsConfig = (sources = []) => {
                         },
                         bottomTabs: {
                             drawBehind: true
-                        }
+                        },
+                        statusBar: {
+                            style: 'light',
+                            visible: 'false'
+                        },
+                    
                     }
                 }
             },
@@ -39,6 +44,9 @@ export const bottomTabsConfig = (sources = []) => {
                         },
                         bottomTabs: {
                             drawBehind: true
+                        },
+                        statusBar: {
+                            style: 'light'
                         }
                     }
                 }
@@ -55,6 +63,9 @@ export const bottomTabsConfig = (sources = []) => {
                         },
                         bottomTabs: {
                             drawBehind: true
+                        },
+                        statusBar: {
+                            style: 'light'
                         }
                     }
                 }

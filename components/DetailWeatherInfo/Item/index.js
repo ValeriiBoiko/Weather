@@ -31,14 +31,14 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: widthDependedPixel(20),
-        lineHeight: widthDependedPixel(20),
+        lineHeight: widthDependedPixel(25),
         paddingBottom: widthDependedPixel(5),
         color: '#999',
         fontFamily: Font.QUICKSAND_LIGHT
     },
     value: {
         fontSize: widthDependedPixel(16),
-        lineHeight: widthDependedPixel(16),
+        lineHeight: widthDependedPixel(20),
         color: '#888',
         fontFamily: Font.QUICKSAND_SEMIBOLD
     }

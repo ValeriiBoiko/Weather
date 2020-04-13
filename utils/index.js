@@ -1,8 +1,6 @@
 import { Platform } from "react-native";
 
 export const getDayName = (index, lang = "en") => {
-    console.log(lang); 
-
     const days = {
         "en": ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         "ru": ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']

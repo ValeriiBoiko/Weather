@@ -16,7 +16,7 @@ export const common = StyleSheet.create({
     regularText: {
         color: Color.BLACK,
         fontSize: widthDependedPixel(14),
-        lineHeight: widthDependedPixel(14),
+        lineHeight: widthDependedPixel(16),
         fontFamily: Font.QUICKSAND_REGULAR
     },
     largerText: {

@@ -6,7 +6,7 @@ import React from 'react';
 import DailyForecast from './screens/DailyForecast';
 import WeeklyForecast from './screens/WeeklyForecast';
 import { Navigation } from 'react-native-navigation'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers'
 import { Provider } from 'react-redux';
 import Icon from './ui/Icon/Icon';
@@ -15,6 +15,7 @@ import { bottomTabsConfig } from './navigation/bottomTabs';
 import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import Settings from './screens/Settings';
+import thunkMiddleware from 'redux-thunk';
 
 let persistConfig = {
     key: 'root',
@@ -23,7 +24,11 @@ let persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(persistedReducer);
+const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
+
+// store.subscribe(() => {
+//     console.log(store.getState().location)
+// })
 
 persistStore(store, {}, bootstrapNavigation);
 

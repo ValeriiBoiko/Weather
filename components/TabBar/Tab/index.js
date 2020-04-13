@@ -14,6 +14,9 @@ function TabContainer(props) {
             Navigation.mergeOptions(props.component, {
                 bottomTabs: {
                     currentTabIndex: props.index
+                },
+                statusBar: {
+                    visible: false
                 }
             });
         }

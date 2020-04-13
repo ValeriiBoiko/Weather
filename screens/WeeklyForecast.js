@@ -69,7 +69,7 @@ class WeeklyForecast extends React.Component {
         <SafeAreaView style={{
           backgroundColor: Color.TAB_BAR
         }} />
-        <StatusBar barStyle={'light-content'}  />
+        {/* <StatusBar barStyle={'light-content'}  /> */}
       </View>
     )
   }

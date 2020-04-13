@@ -16,16 +16,18 @@ export const GeoSource = {
 }
 
 export const Font = {
-    QUICKSAND_BOLD: 'Quicksand-Bold',
-    QUICKSAND_LIGHT: 'Quicksand-Light',
-    QUICKSAND_REGULAR: 'Quicksand-Regular',
-    QUICKSAND_MEDIUM: 'Quicksand-Medium',
-    QUICKSAND_SEMIBOLD: 'Quicksand-SemiBold',
+    QUICKSAND_LIGHT: 'Comfortaa-Light',
+    QUICKSAND_REGULAR: 'Comfortaa-Regular',
+    QUICKSAND_MEDIUM: 'Comfortaa-Regular',
+    QUICKSAND_SEMIBOLD: 'Comfortaa-SemiBold',
+    QUICKSAND_BOLD: 'Comfortaa-Bold',
 } 
 
 export const Action = {
     UPDATE_WEATHER: "UPDATE_WEATHER",
+    SET_WEATHER: "SET_WEATHER",
     UPDATE_LOCATION: "UPDATE_LOCATION",
+    SET_LOCATION: "SET_LOCATION",
     SET_SCREEN: 'SET_SCREEN',
     UPDATE_LOCATION_USAGE: 'UPDATE_LOCATION_USAGE',
     UPDATE_UNIT_SYSTEM: 'UPDATE_UNIT_SYSTEM',

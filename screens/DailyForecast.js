@@ -81,7 +81,7 @@ class DailyForecast extends React.Component {
 
           </ScrollView>
           <TabBar config={bottomTabsConfig()} />
-          <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} />
+          {/* <StatusBar barStyle={'light-content'} backgroundColor={this.props.theme.backgroundColor} /> */}
         </SafeAreaView>
       </Fragment>
     )
