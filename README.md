@@ -3,7 +3,7 @@
 "Weather" is another mobile application to track current weather and get forecast for your location. 
 Application was developed with purpose to get more experience with React Native and its libs.
 
-![Demo](https://github.com/ValeriiBoiko/Wheather/blob/master/demo.gif?raw=true){:height="300px"}
+![Demo](https://github.com/ValeriiBoiko/Wheather/blob/master/demo.gif?raw=true){:height="300px" width="175px"}
 
 ### Installing
 
