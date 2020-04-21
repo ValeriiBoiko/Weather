@@ -9,6 +9,7 @@ import data from '../../localization.json';
 class DetailWeatherInfo extends React.Component {
 
     render() {
+        const styles = getStyles(this.props);
 
         let sunrise = this.props.sunrise;
         let sunset = this.props.sunset;
@@ -34,44 +35,44 @@ class DetailWeatherInfo extends React.Component {
                 this.props.style
             ]}>
                 <Item style={styles.item} 
-                    name={'temp'} color={'#999'} 
-                    size={widthDependedPixel(75)}
-                    title={data.phrase.feelsLike[this.props.lang]} value={this.props.weather.temp + ' °C'}/>
+                    name={'temp'} size={widthDependedPixel(65)}
+                    title={data.phrase.feelsLike[this.props.lang]} value={this.props.weather.temp + ' °' + data.units[this.props.unitSystem].temp}/>
                 <Item style={styles.item} 
-                    name={'wind'} color={'#999'} 
-                    size={widthDependedPixel(75)}
-                    title={data.phrase.wind[this.props.lang]} value={this.props.weather.wind +  ' km/h'} />
+                    name={'wind'} size={widthDependedPixel(65)}
+                    title={data.phrase.wind[this.props.lang]} value={this.props.weather.wind +  ' ' + data.units[this.props.unitSystem].speed} />
                 <Item style={styles.item} 
-                    name={'sunrise'} color={'#999'} 
-                    size={widthDependedPixel(75)}
+                    name={'sunrise'} size={widthDependedPixel(65)}
                     title={data.phrase.sunrise[this.props.lang]} value={sunrise} />
                 <Item style={styles.item} 
-                    name={'sunset'} color={'#999'} 
-                    size={widthDependedPixel(75)}
+                    name={'sunset'} size={widthDependedPixel(65)}
                     title={data.phrase.sunset[this.props.lang]} value={sunset} />
             </View>
         )
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: Color.WHITE,
-        alignContent: 'stretch',
-        flex: 1,
-    },
-    item: {
-        minWidth: '50%'
-    }
-})
+const getStyles = (props) => (
+    StyleSheet.create({
+        container: {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            backgroundColor: Color[props.colorScheme].WHITE,
+            alignContent: 'stretch',
+            flex: 1,
+        },
+        item: {
+            minWidth: '50%'
+        }
+    })
+)
 
 const mapStateToProps = (state) => ({
     weather: state.weather.today,
     sunset: state.weather.sunset,
     sunrise: state.weather.sunrise,
-    lang: state.lang
+    lang: state.lang,
+    colorScheme: state.colorScheme,
+    unitSystem: state.unitSystem
 })
 
 export default connect(mapStateToProps)(DetailWeatherInfo);

@@ -1,3 +1,8 @@
+export const ColorScheme = {
+    DARK: 'dark',
+    LIGHT: 'light'
+}
+
 export const Color = {
     ORANGE: "#f8a057",
     CYAN: "#5eb5c9",
@@ -6,7 +11,29 @@ export const Color = {
     WHITE: "#fff",
     DARK_BLUE: "#293551",
     BLUE: "#5996f7",
-    BLACK: "#333"
+    BLACK: "#333",
+    'light': {
+        ORANGE: "#f8a057",
+        CYAN: "#5eb5c9",
+        DIRTY_BLUE: "#738e97",
+        DARK_BLUE: "#293551",
+        TAB_BAR: "#e7e7e8",
+        SEPARATOR: "#e7e7e8",
+        WHITE: "#f5f5f5",
+        BLUE: "#5996f7",
+        BLACK: "#333"
+    },
+    'dark': {
+        ORANGE: "#f8a057",
+        CYAN: "#5eb5c9",
+        DIRTY_BLUE: "#738e97",
+        DARK_BLUE: "#293551",
+        TAB_BAR: "#212121",
+        SEPARATOR: "#333333",
+        WHITE: "#171717",
+        BLUE: "#5996f7",
+        BLACK: "#eee"
+    }
 }
 
 export const GeoSource = {
@@ -16,22 +43,20 @@ export const GeoSource = {
 }
 
 export const Font = {
-    QUICKSAND_LIGHT: 'Comfortaa-Light',
-    QUICKSAND_REGULAR: 'Comfortaa-Regular',
-    QUICKSAND_MEDIUM: 'Comfortaa-Regular',
-    QUICKSAND_SEMIBOLD: 'Comfortaa-SemiBold',
-    QUICKSAND_BOLD: 'Comfortaa-Bold',
+    COMFORTAA_LIGHT: 'Comfortaa-Light',
+    COMFORTAA_REGULAR: 'Comfortaa-Regular',
+    COMFORTAA_MEDIUM: 'Comfortaa-Regular',
+    COMFORTAA_SEMIBOLD: 'Comfortaa-SemiBold',
+    COMFORTAA_BOLD: 'Comfortaa-Bold',
 } 
 
 export const Action = {
-    UPDATE_WEATHER: "UPDATE_WEATHER",
     SET_WEATHER: "SET_WEATHER",
-    UPDATE_LOCATION: "UPDATE_LOCATION",
     SET_LOCATION: "SET_LOCATION",
+    SET_LANGUAGE: "SET_LANGUAGE",
+    SET_COLOR_SCHEME: "SET_COLOR_SCHEME",
     SET_SCREEN: 'SET_SCREEN',
-    UPDATE_LOCATION_USAGE: 'UPDATE_LOCATION_USAGE',
-    UPDATE_UNIT_SYSTEM: 'UPDATE_UNIT_SYSTEM',
-    UPDATE_LOCATION_SOURCE: 'UPDATE_LOCATION_SOURCE',
+    SET_UNIT_SYSTEM: 'SET_UNIT_SYSTEM',
 }
 
 export const Images = {
@@ -132,4 +157,14 @@ export const IconsMap = {
         image: Images.NIGHT,
         color: Color.DARK_BLUE
     },
+}
+
+export const Unit = {
+    IMPERIAL: 'imperial',
+    METRIC: 'metric'
+}
+
+export const Language = {
+    EN: 'en',
+    UA: 'ua'
 }

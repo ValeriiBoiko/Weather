@@ -3,45 +3,51 @@ import { View, StyleSheet, Text } from 'react-native';
 import Icon from '../../../ui/Icon/Icon';
 import { Color, Font } from '../../../constants';
 import { widthDependedPixel, heightPercentageToDP } from '../../../utils/units';
+import { connect } from 'react-redux';
+import { common } from '../../../styles/common';
 
-class Item extends React.Component {
-    render() {
-        return (
-            <View style={[
-                this.props.style,
-                styles.container
-            ]}>
-                <Icon name={this.props.name} color={this.props.color} size={this.props.size} />
-                <View style={styles.content}>
-                    <Text style={styles.title}>{this.props.title}</Text>
-                    <Text style={styles.value}>{this.props.value}</Text>
-                </View>
+function Item (props) {
+    const styles = getStyles(props);
+
+    return (
+        <View style={[
+            props.style,
+            styles.container
+        ]}>
+            <Icon name={props.name} style={styles.icon} size={props.size} />
+            <View>
+                <Text style={styles.title}>{props.title}</Text>
+                <Text style={styles.value}>{props.value}</Text>
             </View>
-        )
-    }
+        </View>
+    )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (props) => StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
     },
-    content: {
-        
+    icon: {
+        color: Color[props.colorScheme].BLACK,
+        opacity: .75
     },
     title: {
-        fontSize: widthDependedPixel(20),
-        lineHeight: widthDependedPixel(25),
+        fontSize: widthDependedPixel(17),
+        lineHeight: widthDependedPixel(21),
         paddingBottom: widthDependedPixel(5),
-        color: '#999',
-        fontFamily: Font.QUICKSAND_LIGHT
+        color: Color[props.colorScheme].BLACK,
+        fontFamily: Font.COMFORTAA_LIGHT
     },
     value: {
-        fontSize: widthDependedPixel(16),
-        lineHeight: widthDependedPixel(20),
-        color: '#888',
-        fontFamily: Font.QUICKSAND_SEMIBOLD
+        ...common.regularText,
+        fontFamily: Font.COMFORTAA_SEMIBOLD,
+        color: Color[props.colorScheme].BLACK,
     }
 });
 
-export default Item;
+const mapStateToProps = (state) => ({
+    colorScheme: state.colorScheme
+})
+
+export default connect(mapStateToProps)(Item);

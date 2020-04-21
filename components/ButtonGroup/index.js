@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Color } from '../../constants';
 import { widthDependedPixel } from '../../utils/units';
-import Touchable from '../Touchable';
-import Icon from '../Icon/Icon';
+import Touchable from '../../ui/Touchable';
+import Icon from '../../ui/Icon/Icon';
+import { connect } from 'react-redux';
 
 function ButtonGroup(props) {
     const [activeButton, setActiveButton] = useState(props.selected);
+
+    if (activeButton !== props.selected) {
+        setActiveButton(props.selected);
+    }
+
     const styles = getStyles(props);
     const activeStyle = [
         styles.groupButton,
@@ -45,7 +51,7 @@ const getStyles = (props) => (
             alignItems: 'stretch',
             borderRadius: widthDependedPixel(7),
             overflow: 'hidden',
-            borderColor: Color.CYAN,
+            borderColor: Color[props.colorScheme].CYAN,
             borderWidth: 1
         },
         groupButton: {
@@ -58,27 +64,33 @@ const getStyles = (props) => (
             backgroundColor: props.activeBackground
         },
         contentColor: {
-            color: props.color
+            color: Color[props.colorScheme].BLACK
         },
         contentActiveColor: {
-            color: props.activeColor
+            color: Color[props.colorScheme].WHITE
         }
     })
 )
 
 ButtonGroup.defaultProps = {
-    color: Color.BLACK,
-    activeColor: Color.WHITE,
-    background: Color.TAB_BAR,
-    activeBackground: Color.CYAN,
     size: widthDependedPixel(30),
     buttons: []
 }
 
-export default React.memo(ButtonGroup, (prevProps, nextProps) => {
-    if (prevProps.selected !== nextProps.selected) {
-        return true
-    }
+const mapStateToProps = (state, props) => ({
+    colorScheme: state.colorScheme,
+    background: props.background || Color[state.colorScheme].TAB_BAR,
+    activeBackground: props.activeBackground || Color[state.colorScheme].CYAN,
+})
 
-    return false;
-});
+export default connect(mapStateToProps)(ButtonGroup);
+
+// export default connect(mapStateToProps)(React.memo(ButtonGroup, (prevProps, nextProps) => {
+//     // if (prevProps.selected !== nextProps.selected) {
+//     //     return true
+//     // }
+
+//     // return false;
+
+//     return true
+// }));

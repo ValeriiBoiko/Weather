@@ -1,24 +1,14 @@
 import React from 'react';
 import { Image, StyleSheet } from "react-native";
 
-/**
- * This component was created to force images have 
- * correct dimensions base on aspectRatio by default
- * 
- * @param {Object} props 
- */
-
- //TODO: do the same for dynamic loaded images
-
 function RNImage (props) {
-    const source = props.source;
     let imageSize = {};
+    let aspectRatio = 1;
 
-    if (source) {
-        imageSize = Image.resolveAssetSource(source);
+    if (!props.source.uri) {
+        imageSize = Image.resolveAssetSource(props.source);
+        aspectRatio = imageSize.width / imageSize.height;
     }
-
-    const aspectRatio = imageSize.width / imageSize.height;
 
     return (
         <Image {...props} style={[

@@ -3,30 +3,24 @@ import { APIHelper } from "./utils/api";
 import Permission from "./utils/Permission";
 import RNLocation from 'react-native-location';
 
-
 export const setWeatherAction = payload => ({
     type: Action.SET_WEATHER,
     payload: payload
 });
 
-export const updateLocationAction = payload => ({
-    type: Action.UPDATE_LOCATION,
+export const setUnitAction = payload => ({
+    type: Action.SET_UNIT_SYSTEM,
     payload: payload
 });
 
-export const updateLocationUsage = payload => ({
-    type: Action.UPDATE_LOCATION_USAGE,
-    payload: payload
+export const setLanguageAction = lang => ({
+    type: Action.SET_LANGUAGE,
+    payload: lang
 });
 
-export const updateUnitAction = payload => ({
-    type: Action.UPDATE_UNIT_SYSTEM,
-    payload: payload
-});
-
-export const updateLocationSourceAction = payload => ({
-    type: Action.UPDATE_LOCATION_SOURCE,
-    payload: payload
+export const setColorSchemeAction = color => ({
+    type: Action.SET_COLOR_SCHEME,
+    payload: color
 });
 
 export const setLocationAction = (location, source) => ({
@@ -43,18 +37,19 @@ export const setLocationAction = (location, source) => ({
 export const setErrorAction = error => ({
     type: Action.SET_ERROR,
     payload: error
-})
+});
 
-export const setWeather = ({latitude, longitude}, unitSystem, lang) => {
-    return async (dispatch) => {
+export const setWeather = ({latitude, longitude}) => {
+    return async (dispatch, getState) => {
         try {
+            const { unitSystem, lang } = getState();
             const weather = await APIHelper.fetchWeatherData(latitude, longitude, unitSystem, lang);
             dispatch(setWeatherAction(weather));
         } catch (error) {
             dispatch(setErrorAction(error))
         }
     } 
-}
+};
 
 export const setLocation = (source, location = null) => {
     return async (dispatch, getState) => {
@@ -74,4 +69,4 @@ export const setLocation = (source, location = null) => {
 
         dispatch(setLocationAction(location, source))
     }
-}
+};

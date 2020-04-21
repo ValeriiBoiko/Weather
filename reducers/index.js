@@ -1,11 +1,11 @@
-import { Action, Color, IconsMap, Images, GeoSource } from "../constants";
+import { Action, Color, IconsMap, Images, GeoSource, ColorScheme, Unit, Language } from "../constants";
 
 const initialState = {
     city: 'n/a',
     location: null,
     useStaticLocation: false,
     locationSource: GeoSource.IP,
-    unitSystem: 'imperial',
+    unitSystem: Unit.IMPERIAL,
     weather: {
         sunrise: 'n/a',
         sunset: 'n/a',
@@ -28,13 +28,14 @@ const initialState = {
         backgroundColor: Color.CYAN,
         backgroundImage: Images.CLOUDY_DAY
     },
-    lang: 'en'
+    lang: Language.EN,
+    colorScheme: ColorScheme.LIGHT
 }
 
 export default (state = initialState, action) => {
 
     switch(action.type) {
-        case Action.UPDATE_WEATHER :
+        case Action.SET_WEATHER :
             return {
                 ...state,
                 weather: action.payload,
@@ -42,36 +43,31 @@ export default (state = initialState, action) => {
                     backgroundColor: IconsMap[action.payload.today.icon].color,
                     backgroundImage: IconsMap[action.payload.today.icon].image
                 }
-            };
-        case Action.UPDATE_LOCATION :
-            return {
-                ...state,
-                location: action.payload
-            };
+            }
         case Action.SET_SCREEN :
             return {
                 ...state,
                 currentScreen: action.payload
             }
-        case Action.UPDATE_LOCATION_USAGE :
-            return {
-                ...state,
-                useStaticLocation: action.payload
-            }
-        case Action.UPDATE_UNIT_SYSTEM :
+        case Action.SET_UNIT_SYSTEM :
             return {
                 ...state,
                 unitSystem: action.payload
-            }
-        case Action.UPDATE_LOCATION_SOURCE :
-            return {
-                ...state,
-                locationSource: action.payload
             }
         case Action.SET_LOCATION :
             return {
                 ...state,
                 ...action.payload
+            }
+        case Action.SET_LANGUAGE:
+            return {
+                ...state,
+                lang: action.payload
+            }
+        case Action.SET_COLOR_SCHEME:
+            return {
+                ...state,
+                colorScheme: action.payload
             }
     }
 

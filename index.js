@@ -26,9 +26,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
 
-// store.subscribe(() => {
-//     console.log(store.getState().location)
-// })
+store.subscribe(() => {
+    const state = store.getState();
+})
 
 persistStore(store, {}, bootstrapNavigation);
 

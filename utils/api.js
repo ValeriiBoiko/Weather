@@ -1,10 +1,12 @@
-import { getDayName } from ".";
+import data from "../localization.json";
+
+let calls = 0;
 
 export class APIHelper {
     static async fetchWeatherData(lat, lng, unit, lang = "en") {
         let normalizedJson = {};
     
-        await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=1428e1e975ee301a543851cf250a623f&units=${unit}`)
+        await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=1428e1e975ee301a543851cf250a623f&units=${unit}&lang=${lang}`)
             .then(data => data.json())
             .then(json => {
                 const currentWeather = json.list[0];
@@ -76,7 +78,7 @@ export class APIHelper {
         weeklyData.forEach(item => {
             let temp = parseFloat(item.main.temp.toFixed(1));
             let date = new Date((item.dt * 1000));
-            day = getDayName(date.getDay(), lang);
+            day = data.days.shortName[lang][date.getDay()]
     
             if (resultData[day]) {
                 if (temp < resultData[day].minTemp) {

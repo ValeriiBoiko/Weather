@@ -14,15 +14,13 @@ export const common = StyleSheet.create({
         alignItems: 'center'
     },
     regularText: {
-        color: Color.BLACK,
         fontSize: widthDependedPixel(14),
-        lineHeight: widthDependedPixel(16),
-        fontFamily: Font.QUICKSAND_REGULAR
+        lineHeight: widthDependedPixel(18),
+        fontFamily: Font.COMFORTAA_REGULAR
     },
     largerText: {
-        color: Color.BLACK,
         fontSize: widthDependedPixel(16),
         lineHeight: widthDependedPixel(20),
-        fontFamily: Font.QUICKSAND_REGULAR
+        fontFamily: Font.COMFORTAA_REGULAR
     }
 }) 
