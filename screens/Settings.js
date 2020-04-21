@@ -27,6 +27,13 @@ function Settings(props) {
     })
   }
 
+  onLocationChange = async (source) => {
+    props.setLocation(source)
+    .then((location) => {
+      props.setWeather(location, props.unitSystem, props.lang)
+    });
+  }
+
   return (
     <ScreenWrapper headerColor={Color[props.colorScheme].WHITE}
       bodyColor={Color[props.colorScheme].WHITE}
@@ -35,7 +42,7 @@ function Settings(props) {
       <GoogleMap />
 
       <SettingRow title={data.phrase.locationSource[props.lang]}>
-        <ButtonGroup buttons={locationButtons} onValueChange={props.setLocation} selected={props.locationSource} />
+        <ButtonGroup buttons={locationButtons} onValueChange={onLocationChange} selected={props.locationSource} />
       </SettingRow>
 
       <SettingRow title={data.phrase.unitsFormat[props.lang]}>

@@ -6,10 +6,8 @@ import { setWeather, setLocation } from '../../action';
 
 function GoogleMapContainer(props) {
     onLocationChange = (source, location = null) => {
-        props.setLocation(source, location)
-            .then(() => {
-                props.setWeather(props.location);
-            })
+        props.setLocation(source, location);
+        props.setWeather(props.location);
     }
 
     return (

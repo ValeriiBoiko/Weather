@@ -68,5 +68,7 @@ export const setLocation = (source, location = null) => {
         }
 
         dispatch(setLocationAction(location, source))
+
+        return location;
     }
 };
