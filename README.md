@@ -12,11 +12,6 @@ You can test the application right after download the repository as any other Re
 2) To run application on android device/emulator use command `npx react-native run-android`
 3) To run application on ios device/emulator use command `npx react-native run-ios`
 
-### What is next?
-1) Add ability to choose units format (metric/imperial);
-2) Add push notifications when tomorrow will be rainy or too windy;
-3) Add ability to choose your location without providing access to your actual geolocation.
-
 ## Authors
 
 * **Valerii Boiko** - [ValeriiBoiko](https://github.com/ValeriiBoiko)
