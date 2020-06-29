@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import React from 'react';
 import DailyForecast from './screens/DailyForecast';
 import WeeklyForecast from './screens/WeeklyForecast';
@@ -18,51 +14,45 @@ import Settings from './screens/Settings';
 import thunkMiddleware from 'redux-thunk';
 
 let persistConfig = {
-    key: 'root',
-    storage: AsyncStorage
-}
+  key: 'root',
+  storage: AsyncStorage,
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
-
-store.subscribe(() => {
-    const state = store.getState();
-})
 
 persistStore(store, {}, bootstrapNavigation);
 
 function ReduxProvider(Component) {
-    return (props) => (
-        <Provider store={store}>
-            <Component {...props} />
-        </Provider>
-    );
+  return props => (
+    <Provider store={store}>
+      <Component {...props} />
+    </Provider>
+  );
 }
 
 function bootstrapNavigation() {
-    Navigation.registerComponent(`screen.DailyForecast`, () => ReduxProvider(DailyForecast), () => DailyForecast);
-    Navigation.registerComponent(`screen.WeeklyForecast`, () => ReduxProvider(WeeklyForecast), () => WeeklyForecast);
-    Navigation.registerComponent(`screen.Settings`, () => ReduxProvider(Settings), () => Settings);
+  Navigation.registerComponent(`screen.DailyForecast`, () => ReduxProvider(DailyForecast), () => DailyForecast);
+  Navigation.registerComponent(`screen.WeeklyForecast`, () => ReduxProvider(WeeklyForecast), () => WeeklyForecast);
+  Navigation.registerComponent(`screen.Settings`, () => ReduxProvider(Settings), () => Settings);
 
-    Navigation.setDefaultOptions({
-        bottomTabs: {
-            visible: false,
-        }
+  Navigation.setDefaultOptions({
+    bottomTabs: {
+      visible: false,
+    },
+  });
+
+  Promise.all([
+    Icon.getImageSource('day', heightDependedPixel(35)),
+    Icon.getImageSource('week', heightDependedPixel(35)),
+    Icon.getImageSource('settings', heightDependedPixel(35)),
+  ])
+    .then(sources => {
+      Navigation.setRoot({
+        root: {
+          bottomTabs: bottomTabsConfig(sources),
+        },
+      });
     })
-
-    Promise.all([
-        Icon.getImageSource('day', heightDependedPixel(35)),
-        Icon.getImageSource('week', heightDependedPixel(35)),
-        Icon.getImageSource('settings', heightDependedPixel(35)),
-    ])
-        .then((sources) => {
-
-            Navigation.setRoot({
-                root: {
-                    bottomTabs: bottomTabsConfig(sources)
-                }
-            });
-        })
-        .catch(error => console.log(error));
+    .catch(error => console.log(error));
 }

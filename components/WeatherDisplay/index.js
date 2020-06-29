@@ -10,112 +10,119 @@ import { titleCase } from '../../utils';
 import data from "../../localization.json";
 
 function WeatherDisplay(props) {
-    getDate = (ms = null) => {
-        const days = data.days.longName[props.lang];
-        const months = data.months[props.lang];
-        const date = ms ? new Date(ms) : new Date();
-
-        return (
-            <Text style={styles.date}>{days[date.getDay()]}, {months[date.getMonth()]} {date.getDate()}</Text>
-        )
-    }
+  const getDate = (ms = null) => {
+    const days = data.days.longName[props.lang];
+    const months = data.months[props.lang];
+    const date = ms ? new Date(ms) : new Date();
 
     return (
-        <View style={styles.container}>
-            <RNImage source={props.theme.backgroundImage}
-                style={styles.image} />
-            <View style={styles.content}>
-                <View style={styles.info}>
-                    <View style={common.flex}>
-                        <Text style={styles.city}>{props.city}</Text>
-                        {!props.compact && this.getDate()}
-                        <Text style={styles.weather}>
-                            {titleCase(props.weather.description)}
-                        </Text>
-                    </View>
+      <Text style={styles.date}>
+        {days[date.getDay()]}, {months[date.getMonth()]} {date.getDate()}
+      </Text>
+    );
+  };
 
-                    <Icon size={widthDependedPixel(120)} name={IconsMap[props.weather.icon].icon} color={Color.WHITE} />
-                </View>
+  return (
+    <View style={styles.container}>
+      <RNImage source={props.theme.backgroundImage} style={styles.image} />
+      <View style={styles.content}>
+        <View style={styles.info}>
+          <View style={common.flex}>
+            <Text style={styles.city}>{props.city}</Text>
+            {!props.compact && getDate()}
+            <Text style={styles.weather}>
+              {titleCase(props.weather.description)}
+            </Text>
+          </View>
 
-                <View style={styles.tempContainer}>
-                    <View style={common.row}>
-                        <Text style={styles.temperature}>{Math.round(props.weather.temp) || null}</Text>
-                        <Text style={styles.unit}>°{data.units[props.unitSystem].temp}</Text>
-                    </View>
-                </View>
-            </View>
+          <Icon
+            size={widthDependedPixel(120)}
+            name={IconsMap[props.weather.icon].icon}
+            color={Color.WHITE}
+          />
         </View>
-    )
+
+        <View style={styles.tempContainer}>
+          <View style={common.row}>
+            <Text style={styles.temperature}>{Math.round(props.weather.temp) || null}</Text>
+            <Text style={styles.unit}>
+              °{data.units[props.unitSystem].temp}
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    content: {
-        flex: 1,
-        paddingHorizontal: '5%',
-        paddingBottom: widthPercentageToDP(2.5),
-        paddingTop: 10
-    },
-    image: {
-        bottom: 0,
-        position: 'absolute'
-    },
-    info: {
-        flex: 0,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        minHeight: widthDependedPixel(125)
-    },
-    city: {
-        flexWrap: 'wrap',
-        color: Color.WHITE,
-        fontSize: widthDependedPixel(24),
-        lineHeight: widthDependedPixel(30),
-        fontFamily: Font.COMFORTAA_REGULAR
-    },
-    date: {
-        paddingBottom: heightDependedPixel(8),
-        fontFamily: Font.COMFORTAA_REGULAR,
-        lineHeight: widthDependedPixel(19),
-        fontSize: widthDependedPixel(15),
-        color: Color.WHITE,
-    },
-    weather: {
-        color: Color.WHITE,
-        fontSize: widthDependedPixel(16),
-        lineHeight: widthDependedPixel(20),
-        paddingTop: heightDependedPixel(4),
-        fontFamily: Font.COMFORTAA_SEMIBOLD
-    },
-    tempContainer: {
-        justifyContent: 'flex-end',
-        flex: 1
-    },
-    temperature: {
-        color: Color.WHITE,
-        fontSize: widthDependedPixel(75),
-        fontFamily: Font.COMFORTAA_MEDIUM,
-        lineHeight: widthDependedPixel(100)
-    },
-    unit: {
-        color: Color.WHITE,
-        fontSize: widthDependedPixel(35),
-        lineHeight: widthDependedPixel(43),
-        fontFamily: Font.COMFORTAA_SEMIBOLD,
-        letterSpacing: 2
-    }
-})
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: '5%',
+    paddingBottom: widthPercentageToDP(2.5),
+    paddingTop: 10,
+  },
+  image: {
+    bottom: 0,
+    position: 'absolute',
+  },
+  info: {
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    minHeight: widthDependedPixel(125),
+  },
+  city: {
+    flexWrap: 'wrap',
+    color: Color.WHITE,
+    fontSize: widthDependedPixel(24),
+    lineHeight: widthDependedPixel(30),
+    fontFamily: Font.COMFORTAA_REGULAR,
+  },
+  date: {
+    paddingBottom: heightDependedPixel(8),
+    fontFamily: Font.COMFORTAA_REGULAR,
+    lineHeight: widthDependedPixel(19),
+    fontSize: widthDependedPixel(15),
+    color: Color.WHITE,
+  },
+  weather: {
+    color: Color.WHITE,
+    fontSize: widthDependedPixel(16),
+    lineHeight: widthDependedPixel(20),
+    paddingTop: heightDependedPixel(4),
+    fontFamily: Font.COMFORTAA_SEMIBOLD,
+  },
+  tempContainer: {
+    justifyContent: 'flex-end',
+    flex: 1,
+  },
+  temperature: {
+    color: Color.WHITE,
+    fontSize: widthDependedPixel(75),
+    fontFamily: Font.COMFORTAA_MEDIUM,
+    lineHeight: widthDependedPixel(100),
+  },
+  unit: {
+    color: Color.WHITE,
+    fontSize: widthDependedPixel(35),
+    lineHeight: widthDependedPixel(43),
+    fontFamily: Font.COMFORTAA_SEMIBOLD,
+    letterSpacing: 2,
+  },
+});
 
 const mapStateToProps = (state, props) => ({
-    city: state.weather.city,
-    weather: state.weather.today,
-    lang: state.lang,
-    theme: state.displayTheme,
-    unitSystem: state.unitSystem,
-    compact: props.compact === null ? false : props.compact
+  city: state.weather.city,
+  weather: state.weather.today,
+  lang: state.lang,
+  theme: state.displayTheme,
+  unitSystem: state.unitSystem,
+  compact: props.compact === null ? false : props.compact,
 });
 
 export default connect(mapStateToProps)(WeatherDisplay);

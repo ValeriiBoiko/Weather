@@ -10,36 +10,39 @@ import ScreenWrapper from '../components/ScreenWrapper';
 
 function DailyForecast(props) {
   const styles = getStyles(props);
-  
+
   return (
-    <ScreenWrapper headerColor={props.theme.backgroundColor}
+    <ScreenWrapper
+      headerColor={props.theme.backgroundColor}
       bodyColor={Color[props.colorScheme].WHITE}
-      footerColor={Color[props.colorScheme].TAB_BAR} 
-      render={(availableHeight) => (
+      footerColor={Color[props.colorScheme].TAB_BAR}
+      render={availableHeight => (
         <View style={common.flex}>
           <View style={[
             styles.weatherDisplayContainer,
-            {height: heightPercentageToDP(70, availableHeight)}
+            { height: heightPercentageToDP(70, availableHeight) }
           ]}>
             <WeatherDisplay />
           </View>
           <DetailWeatherInfo />
         </View>
-      )} >
-    </ScreenWrapper>
-  )
+      )}
+    />
+  );
 }
 
-const getStyles = (props) => StyleSheet.create({
-  weatherDisplayContainer: {
-    backgroundColor: props.theme.backgroundColor,
-    overflow: 'hidden'
-  }
-})
+const getStyles = props => (
+  StyleSheet.create({
+    weatherDisplayContainer: {
+      backgroundColor: props.theme.backgroundColor,
+      overflow: 'hidden',
+    },
+  })
+);
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   theme: state.displayTheme,
-  colorScheme: state.colorScheme
+  colorScheme: state.colorScheme,
 });
 
 export default connect(mapStateToProps)(DailyForecast);
