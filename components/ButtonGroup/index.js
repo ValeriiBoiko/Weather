@@ -20,7 +20,6 @@ function ButtonGroup(props) {
     const isActive = button.value === activeButton;
     const style = isActive ? activeStyle : styles.groupButton;
     const valueStyle = isActive ? styles.contentActiveColor : styles.contentColor;
-    if (isActive) console.log(Color[props.colorScheme].CYAN);
 
     return (
       <Touchable

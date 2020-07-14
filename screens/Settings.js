@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Color } from '../constants';
 import { connect, batch } from 'react-redux';
 import ButtonGroup from '../components/ButtonGroup';

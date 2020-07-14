@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { GeoSource, ColorScheme } from '../../constants';
 import { heightPercentageToDP } from '../../utils/units';
 import { connect } from 'react-redux';
@@ -6,18 +6,20 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import mapStyle from '../../styles/map';
 
 function GoogleMap(props) {
+  const map = useRef(null);
   const style = {
     height: heightPercentageToDP(30),
   };
+
   const regionConfig = {
     latitudeDelta: 0.2,
     longitudeDelta: 0.2,
-    latitude: props.location.latitude,
-    longitude: props.location.longitude,
+    latitude: props.location.latitude || -1,
+    longitude: props.location.longitude || -1,
   };
 
   useEffect(() => {
-    this.map.animateCamera({
+    map.current.animateCamera({
       center: props.location,
       heading: 0,
       pitch: 0,
@@ -29,9 +31,7 @@ function GoogleMap(props) {
     <MapView
       provider={PROVIDER_GOOGLE}
       customMapStyle={props.colorScheme === ColorScheme.DARK ? mapStyle : null}
-      ref={map => {
-        this.map = map;
-      }}
+      ref={map}
       initialRegion={regionConfig}
       style={style}
       onPress={({ nativeEvent }) => {
