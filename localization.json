@@ -1,104 +1,162 @@
 {
-    "unitSystem": {
-        "metric": {
-            "en": "Metric",
-            "ua": "Метрична" 
-        },
-        "imperial": {
-            "en": "Imperial",
-            "ua": "Імперіальна"
-        }
+  "unitSystem": {
+    "metric": {
+      "en": "Metric",
+      "ua": "Метрична"
     },
-    "location": {
-        "gps": {
-            "en": "GPS",
-            "ua": "GPS"
-        },
-        "ip": {
-            "en": "IP Address",
-            "ua": "IP Адрес"
-        },
-        "static": {
-            "en": "Manually",
-            "ua": "Статично"
-        }
-    },
-    "language": {
-        "ua": {
-            "en": "English",
-            "ua": "Українська"
-        },
-        "en": {
-            "en": "English",
-            "ua": "Українська"
-        }
-    },
-    "theme": {
-        "dark": {
-            "ua": "Темна",
-            "en": "Dark"
-        },
-        "light": {
-            "ua": "Світла",
-            "en": "Light"
-        }
-    },
-    "phrase": {
-        "feelsLike": {
-            "ua": "Відчуття",
-            "en": "Feels like"
-        },
-        "wind": {
-            "ua": "Вітер",
-            "en": "Wind"
-        },
-        "sunrise": {
-            "ua": "Схід",
-            "en": "Sunrise"
-        },
-        "sunset": {
-            "ua": "Захід",
-            "en": "Sunset"
-        },
-        "unitsFormat": {
-            "ua": "Система одиниць",
-            "en": "Units format"
-        },
-        "locationSource": {
-            "ua": "Джерело геолокації",
-            "en": "Location source"
-        },
-        "languagelabel": {
-            "ua": "Бажана мова",
-            "en": "Preferable language"
-        },
-        "themeLabel": {
-            "ua": "Тема додатку",
-            "en": "Color mode"
-        }
-    },
-    "days": {
-        "longName": {
-            "en": ["Sunday", "Monday", "Tuesday", "Wednsday", "Thurstday", "Friday", "Saturday"], 
-            "ua": ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
-        },
-        "shortName": {
-            "en": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            "ua": ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
-        }
-    },
-    "months": {
-        "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        "ua": ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"]
-    },
-    "units": {
-        "metric": {
-            "speed": "m/s",
-            "temp": "C"
-        },
-        "imperial": {
-            "speed": "m/h",
-            "temp": "F"
-        }
+    "imperial": {
+      "en": "Imperial",
+      "ua": "Імперіальна"
     }
+  },
+  "location": {
+    "gps": {
+      "en": "GPS",
+      "ua": "GPS"
+    },
+    "ip": {
+      "en": "IP Address",
+      "ua": "IP Адрес"
+    },
+    "static": {
+      "en": "Manually",
+      "ua": "Статично"
+    }
+  },
+  "language": {
+    "ua": {
+      "en": "English",
+      "ua": "Українська"
+    },
+    "en": {
+      "en": "English",
+      "ua": "Українська"
+    }
+  },
+  "theme": {
+    "dark": {
+      "ua": "Темна",
+      "en": "Dark"
+    },
+    "light": {
+      "ua": "Світла",
+      "en": "Light"
+    }
+  },
+  "phrase": {
+    "feelsLike": {
+      "ua": "Відчуття",
+      "en": "Feels like"
+    },
+    "wind": {
+      "ua": "Вітер",
+      "en": "Wind"
+    },
+    "sunrise": {
+      "ua": "Схід",
+      "en": "Sunrise"
+    },
+    "sunset": {
+      "ua": "Захід",
+      "en": "Sunset"
+    },
+    "unitsFormat": {
+      "ua": "Система одиниць",
+      "en": "Units format"
+    },
+    "locationSource": {
+      "ua": "Джерело геолокації",
+      "en": "Location source"
+    },
+    "languageLabel": {
+      "ua": "Бажана мова",
+      "en": "Preferable language"
+    },
+    "themeLabel": {
+      "ua": "Тема додатку",
+      "en": "Color mode"
+    }
+  },
+  "days": {
+    "longName": {
+      "en": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednsday",
+        "Thurstday",
+        "Friday",
+        "Saturday"
+      ],
+      "ua": [
+        "Неділя",
+        "Понеділок",
+        "Вівторок",
+        "Середа",
+        "Четвер",
+        "П'ятниця",
+        "Субота"
+      ]
+    },
+    "shortName": {
+      "en": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "ua": [
+        "Нд",
+        "Пн",
+        "Вт",
+        "Ср",
+        "Чт",
+        "Пт",
+        "Сб"
+      ]
+    }
+  },
+  "months": {
+    "en": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "ua": [
+      "Січень",
+      "Лютий",
+      "Березень",
+      "Квітень",
+      "Травень",
+      "Червень",
+      "Липень",
+      "Серпень",
+      "Вересень",
+      "Жовтень",
+      "Листопад",
+      "Грудень"
+    ]
+  },
+  "units": {
+    "metric": {
+      "speed": "m/s",
+      "temp": "C"
+    },
+    "imperial": {
+      "speed": "m/h",
+      "temp": "F"
+    }
+  }
 }

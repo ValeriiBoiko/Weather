@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { Color } from '../constants';
-import { connect, batch } from 'react-redux';
+import React from 'react';
+import { Color, ColorScheme, GeoSource, Language, Unit } from '../constants';
+import { connect } from 'react-redux';
 import ButtonGroup from '../components/ButtonGroup';
 import { setLanguageAction, setUnitAction, setWeather, setLocation, setColorSchemeAction } from '../action';
 import data from '../localization.json';
@@ -8,6 +8,7 @@ import GoogleMap from '../components/GoogleMap';
 import ScreenWrapper from '../components/ScreenWrapper';
 import SettingRow from '../components/SettingRow';
 import { getLocationSources, getUnits, getLanguages, getColorSchemes } from '../settingsConfig';
+import PropTypes from 'prop-types';
 
 function Settings(props) {
   const locationButtons = getLocationSources(props.lang);
@@ -16,23 +17,15 @@ function Settings(props) {
   const colorButtons = getColorSchemes(props.lang);
 
   const onLanguageChange = lang => {
-    batch(() => {
-      props.setLanguage(lang);
-      props.setWeather(props.location, props.unitSystem, lang);
-    });
+    props.setLanguage(lang);
   };
 
   const onUnitChange = unitSystem => {
-    batch(() => {
-      props.setUnitSystem(unitSystem);
-      props.setWeather(props.location, unitSystem, props.lang);
-    });
+    props.setUnitSystem(unitSystem);
   };
 
   const onLocationChange = async source => {
-    props.setLocation(source).then(location => {
-      props.setWeather(location, props.unitSystem, props.lang);
-    });
+    props.setLocation(source);
   };
 
   return (
@@ -58,7 +51,7 @@ function Settings(props) {
         />
       </SettingRow>
 
-      <SettingRow title={data.phrase.languagelabel[props.lang]}>
+      <SettingRow title={data.phrase.languageLabel[props.lang]}>
         <ButtonGroup
           buttons={languageButtons}
           onValueChange={onLanguageChange}
@@ -94,7 +87,16 @@ const mapDispatchToProps = dispatch => ({
   setColorScheme: color => dispatch(setColorSchemeAction(color)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Settings);
+Settings.propTypes = {
+  lang: PropTypes.oneOf([Language.EN, Language.UA]).isRequired,
+  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
+  unitSystem: PropTypes.oneOf([Unit.IMPERIAL, Unit.METRIC]).isRequired,
+  locationSource: PropTypes.oneOf([GeoSource.GPS, GeoSource.IP, GeoSource.STATIC]).isRequired,
+  setLocation: PropTypes.func.isRequired,
+  setWeather: PropTypes.func.isRequired,
+  setUnitSystem: PropTypes.func.isRequired,
+  setLanguage: PropTypes.func.isRequired,
+  setColorScheme: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

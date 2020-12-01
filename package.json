@@ -13,6 +13,7 @@
     "@react-native-community/async-storage": "^1.8.1",
     "axios": "^0.19.2",
     "pretty-format": "^25.3.0",
+    "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-location": "^2.5.0",
@@ -30,7 +31,9 @@
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
-    "eslint": "^6.5.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "eslint": "^7.14.0",
+    "eslint-plugin-react": "^7.21.5",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "react-test-renderer": "16.9.0"

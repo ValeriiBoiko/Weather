@@ -2,7 +2,10 @@ import { Action, Color, IconsMap, Images, GeoSource, ColorScheme, Unit, Language
 
 const initialState = {
   city: 'n/a',
-  location: null,
+  location: {
+    latitude: -1,
+    longitude: -1,
+  },
   useStaticLocation: false,
   locationSource: GeoSource.IP,
   unitSystem: Unit.IMPERIAL,

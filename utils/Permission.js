@@ -1,27 +1,29 @@
 import RNLocation from 'react-native-location';
 
 class Permission {
-  static parmissionGranted = async () => {
-    const granted = RNLocation.checkPermission({
-      ios: 'whenInUse',
-      android: {
-        detail: 'coarse',
-      },
+  static parmissionGranted() {
+    return new Promise(resolve => {
+      RNLocation.checkPermission({
+        ios: 'whenInUse',
+        android: {
+          detail: 'coarse'
+        }
+      })
+        .then(granted => resolve(granted))
+        .catch(() => resolve(false));
     });
+  }
 
-    return granted;
-  };
-
-  static requestPermission = async () => {
+  static async requestGeoPermission() {
     const granted = await RNLocation.requestPermission({
       ios: 'whenInUse',
       android: {
-        detail: 'coarse',
+        detail: 'coarse'
       },
     });
 
     return granted;
-  };
+  }
 }
 
 export default Permission;

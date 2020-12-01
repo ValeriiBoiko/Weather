@@ -1,4 +1,4 @@
-import localizedData from "../localization.json";
+import localizedData from '../localization.json';
 
 export class APIHelper {
   static async fetchWeatherData(lat, lng, unit, lang = 'en') {
@@ -38,20 +38,18 @@ export class APIHelper {
     return normalizedJson;
   }
 
-  static async fetchIPData() {
-    let coord = await fetch('http://ip-api.com/json')
-      .then(data => data.json())
-      .then(json => {
-        return {
-          latitude: json.lat,
-          longitude: json.lon,
-        };
-      })
-      .catch(error => {
-        throw new Error(error.message);
-      });
-
-    return coord;
+  static fetchIPData() {
+    return new Promise((resolve) => {
+      fetch('https://ipapi.co/json/')
+        .then(data => data.json())
+        .then(json => {
+          resolve({
+            latitude: json.latitude,
+            longitude: json.longitude,
+          });
+        })
+        .catch(error => resolve(null));
+    })
   }
 
   static _reduceWeatherData(weeklyData, lang) {

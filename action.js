@@ -1,24 +1,24 @@
-import { Action, GeoSource } from "./constants"
-import { APIHelper } from "./utils/api";
-import Permission from "./utils/Permission";
+import {Action, GeoSource} from './constants';
+import {APIHelper} from './utils/api';
+import Permission from './utils/Permission';
 import RNLocation from 'react-native-location';
 
-export const setWeatherAction = payload => ({
+export const setWeatherAction = (payload) => ({
   type: Action.SET_WEATHER,
   payload: payload,
 });
 
-export const setUnitAction = payload => ({
+export const setUnitAction = (payload) => ({
   type: Action.SET_UNIT_SYSTEM,
   payload: payload,
 });
 
-export const setLanguageAction = lang => ({
+export const setLanguageAction = (lang) => ({
   type: Action.SET_LANGUAGE,
   payload: lang,
 });
 
-export const setColorSchemeAction = color => ({
+export const setColorSchemeAction = (color) => ({
   type: Action.SET_COLOR_SCHEME,
   payload: color,
 });
@@ -34,28 +34,36 @@ export const setLocationAction = (location, source) => ({
   },
 });
 
-export const setScreenAction = screen => ({
+export const setScreenAction = (screen) => ({
   type: Action.SET_SCREEN,
   payload: screen,
 });
 
-export const setErrorAction = error => ({
+export const setErrorAction = (error) => ({
   type: Action.SET_ERROR,
   payload: error,
 });
 
-export const setWeather = ({ latitude, longitude }) => {
-  return async (dispatch, getState) => {
+export const setWeather = ({latitude, longitude}, unit, lang) => {
+  return async (dispatch) => {
     try {
-      const { unitSystem, lang } = getState();
       const weather = await APIHelper.fetchWeatherData(
-        latitude,
-        longitude,
-        unitSystem,
-        lang,
+          latitude,
+          longitude,
+          unit,
+          lang,
       );
       dispatch(setWeatherAction(weather));
     } catch (error) {
+      throw Error(
+          'Error in setWeather when params are: ' +
+          JSON.stringify({
+            latitude,
+            longitude,
+            unit,
+            lang,
+          }),
+      );
       dispatch(setErrorAction(error));
     }
   };
@@ -69,16 +77,21 @@ export const setLocation = (source, location = null) => {
         break;
 
       case GeoSource.GPS:
-        if (Permission.parmissionGranted()) {
-          location = await RNLocation.getLatestLocation({ timeout: 5000 });
+        if (await Permission.parmissionGranted()) {
+          location = await RNLocation.getLatestLocation({timeout: 5000});
+        } else {
+          if (await Permission.requestGeoPermission()) {
+            location = await RNLocation.getLatestLocation({timeout: 5000});
+          }
         }
         break;
+
       case GeoSource.STATIC:
         location = location === null ? getState().location : location;
     }
 
-    dispatch(setLocationAction(location, source));
+    location = !location ? getState().location : location;
 
-    return location;
+    dispatch(setLocationAction(location, source));
   };
 };
