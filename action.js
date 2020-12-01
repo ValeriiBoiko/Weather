@@ -1,5 +1,5 @@
-import {Action, GeoSource} from './constants';
-import {APIHelper} from './utils/api';
+import { Action, GeoSource } from './constants';
+import { APIHelper } from './utils/api';
 import Permission from './utils/Permission';
 import RNLocation from 'react-native-location';
 
@@ -44,27 +44,21 @@ export const setErrorAction = (error) => ({
   payload: error,
 });
 
-export const setWeather = ({latitude, longitude}, unit, lang) => {
+export const setWeather = ({ latitude, longitude }, unit, lang) => {
   return async (dispatch) => {
     try {
       const weather = await APIHelper.fetchWeatherData(
-          latitude,
-          longitude,
-          unit,
-          lang,
+        latitude,
+        longitude,
+        unit,
+        lang,
       );
       dispatch(setWeatherAction(weather));
     } catch (error) {
       throw Error(
-          'Error in setWeather when params are: ' +
-          JSON.stringify({
-            latitude,
-            longitude,
-            unit,
-            lang,
-          }),
+        `setWeather action threw the error: ${error}; Passed params: 
+        ${JSON.stringify({ latitude, longitude, unit, lang })}`
       );
-      dispatch(setErrorAction(error));
     }
   };
 };
@@ -78,10 +72,14 @@ export const setLocation = (source, location = null) => {
 
       case GeoSource.GPS:
         if (await Permission.parmissionGranted()) {
-          location = await RNLocation.getLatestLocation({timeout: 5000});
+          location = await RNLocation.getLatestLocation({ timeout: 5000 });
         } else {
           if (await Permission.requestGeoPermission()) {
-            location = await RNLocation.getLatestLocation({timeout: 5000});
+            location = await RNLocation.getLatestLocation({ timeout: 5000 });
+          } else {
+            location = await APIHelper.fetchIPData();
+            console.log(location)
+            source = GeoSource.IP;
           }
         }
         break;

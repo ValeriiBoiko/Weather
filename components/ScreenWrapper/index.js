@@ -14,7 +14,7 @@ function ScreenWrapper(props) {
       <SafeAreaView
         style={[styles.bodyColor, common.flex]}
         onLayout={e => setHeight(e.nativeEvent.layout.height)}>
-        <ScrollView contentContainerStyle={common.flex}>
+        <ScrollView contentContainerStyle={common.flex} bounces={false}>
           {props.render ? props.render(height) : props.children}
         </ScrollView>
 

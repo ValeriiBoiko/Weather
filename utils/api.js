@@ -4,7 +4,7 @@ export class APIHelper {
   static async fetchWeatherData(lat, lng, unit, lang = 'en') {
     let normalizedJson = {};
 
-    await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=1428e1e975ee301a543851cf250a623f&units=${unit}&lang=${lang}`)
+    await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=1428e1e975ee301a543851cf250a623f&units=${unit}&lang=${lang}&mode=jsqon`)
       .then(data => data.json())
       .then(json => {
         const currentWeather = json.list[0];

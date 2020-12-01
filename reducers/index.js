@@ -3,8 +3,8 @@ import { Action, Color, IconsMap, Images, GeoSource, ColorScheme, Unit, Language
 const initialState = {
   city: 'n/a',
   location: {
-    latitude: -1,
-    longitude: -1,
+    latitude: 0,
+    longitude: 0,
   },
   useStaticLocation: false,
   locationSource: GeoSource.GPS,
