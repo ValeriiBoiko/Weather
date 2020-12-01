@@ -77,6 +77,9 @@ DailyForecast.propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number
   }).isRequired,
+  theme: PropTypes.shape({
+    backgroundColor: PropTypes.string.isRequired
+  }).isRequired,
   setLocation: PropTypes.func.isRequired,
   setWeather: PropTypes.func.isRequired,
 }

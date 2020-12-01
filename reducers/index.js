@@ -1,4 +1,4 @@
-import { Action, Color, IconsMap, Images, GeoSource, ColorScheme, Unit, Language } from "../constants";
+import { Action, Color, IconsMap, Images, GeoSource, ColorScheme, Unit, Language } from '../constants';
 
 const initialState = {
   city: 'n/a',
