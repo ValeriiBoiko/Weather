@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Item from './Item';
 import { widthDependedPixel } from '../../utils/units';
-import { Color } from '../../constants';
+import { Color, ColorScheme, Language, Unit } from '../../constants';
 import { connect } from 'react-redux';
 import data from '../../localization.json';
+import PropTypes from 'prop-types';
 
 function millisecondsToTime(ms) {
   const date = new Date(ms);
@@ -14,60 +15,52 @@ function millisecondsToTime(ms) {
   return `${hour}:${minutes}`;
 }
 
-function DetailWeatherInfo(props) {
-  const styles = getStyles(props);
+function DetailWeatherInfo({ sunrise, sunset, unitSystem, lang, colorScheme, weather, ...props }) {
+  const styles = useMemo(() => getStyles(colorScheme), [colorScheme]);
   const iconSize = widthDependedPixel(65);
-  let sunrise = props.sunrise;
-  let sunset = props.sunset;
-
-  if (Number.isInteger(sunrise)) {
-    sunrise = millisecondsToTime(sunrise);
-  }
-
-  if (Number.isInteger(sunset)) {
-    sunset = millisecondsToTime(sunset);
-  }
+  const sunriseTime = sunrise ? millisecondsToTime(sunrise) : 'n/a';
+  const sunsetTime = sunset ? millisecondsToTime(sunset) : 'n/a';
 
   return (
     <View style={[styles.container, props.style]}>
       <Item
         style={styles.item}
-        name={'temp'}
-        size={iconSize}
-        title={data.phrase.feelsLike[props.lang]}
-        value={props.weather.temp + ' °' + data.units[props.unitSystem].temp}
+        iconName={'temp'}
+        iconSize={iconSize}
+        title={data.phrase.feelsLike[lang]}
+        value={weather.temp + ' °' + data.units[unitSystem].temp}
       />
       <Item
         style={styles.item}
-        name={'wind'}
-        size={iconSize}
-        title={data.phrase.wind[props.lang]}
-        value={props.weather.wind + ' ' + data.units[props.unitSystem].speed}
+        iconName={'wind'}
+        iconSize={iconSize}
+        title={data.phrase.wind[lang]}
+        value={weather.wind + ' ' + data.units[unitSystem].speed}
       />
       <Item
         style={styles.item}
-        name={'sunrise'}
-        size={iconSize}
-        title={data.phrase.sunrise[props.lang]}
-        value={sunrise}
+        iconName={'sunrise'}
+        iconSize={iconSize}
+        title={data.phrase.sunrise[lang]}
+        value={sunriseTime}
       />
       <Item
         style={styles.item}
-        name={'sunset'}
-        size={iconSize}
-        title={data.phrase.sunset[props.lang]}
-        value={sunset}
+        iconName={'sunset'}
+        iconSize={iconSize}
+        title={data.phrase.sunset[lang]}
+        value={sunsetTime}
       />
     </View>
   );
 }
 
-const getStyles = props => (
+const getStyles = colorScheme => (
   StyleSheet.create({
     container: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      backgroundColor: Color[props.colorScheme].WHITE,
+      backgroundColor: Color[colorScheme].WHITE,
       alignContent: 'stretch',
       flex: 1,
     },
@@ -85,5 +78,15 @@ const mapStateToProps = state => ({
   colorScheme: state.colorScheme,
   unitSystem: state.unitSystem,
 });
+
+DetailWeatherInfo.propTypes = {
+  style: PropTypes.object,
+  weather: PropTypes.object.isRequired,
+  sunset: PropTypes.number.isRequired,
+  sunrise: PropTypes.number.isRequired,
+  lang: PropTypes.oneOf([Language.EN, Language.UA]).isRequired,
+  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
+  unitSystem: PropTypes.oneOf([Unit.IMPERIAL, Unit.METRIC]).isRequired,
+};
 
 export default connect(mapStateToProps)(DetailWeatherInfo);

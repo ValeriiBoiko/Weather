@@ -7,11 +7,11 @@ const initialState = {
     longitude: -1,
   },
   useStaticLocation: false,
-  locationSource: GeoSource.IP,
+  locationSource: GeoSource.GPS,
   unitSystem: Unit.IMPERIAL,
   weather: {
-    sunrise: 'n/a',
-    sunset: 'n/a',
+    sunrise: 0,
+    sunset: 0,
     city: 'n/a',
     today: {
       dt: new Date(),
