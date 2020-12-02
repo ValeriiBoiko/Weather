@@ -9,6 +9,8 @@ import ScreenWrapper from '../components/ScreenWrapper';
 import SettingRow from '../components/SettingRow';
 import { getLocationSources, getUnits, getLanguages, getColorSchemes } from '../settingsConfig';
 import PropTypes from 'prop-types';
+import { Alert, Linking } from 'react-native';
+import Permission from '../utils/Permission';
 
 function Settings(props) {
   const locationButtons = getLocationSources(props.lang);
@@ -25,6 +27,22 @@ function Settings(props) {
   };
 
   const onLocationChange = async source => {
+    if (source === GeoSource.GPS) {
+      if (!await Permission.parmissionGranted() && !await Permission.requestGeoPermission()) {
+        Alert.alert(
+          data.phrase.geoAlertTitle[props.lang],
+          data.phrase.geoAlertMessage[props.lang],
+          [
+            {
+              text: data.actions.cancel[props.lang],
+              style: 'cancel'
+            },
+            { text: data.actions.ok[props.lang], onPress: Linking.openSettings }
+          ]
+        )
+      }
+    }
+
     props.setLocation(source);
   };
 

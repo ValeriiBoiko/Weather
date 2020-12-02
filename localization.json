@@ -75,6 +75,14 @@
     "themeLabel": {
       "ua": "Тема додатку",
       "en": "Color mode"
+    },
+    "geoAlertTitle": {
+      "ua": "Геолокація",
+      "en": "Geolocation"
+    },
+    "geoAlertMessage": {
+      "ua": "Для надання погода за вашим місцезнахдженням нам потрібен доступ до вашої геолокації",
+      "en": "To give the forecast for your position we need to have permission to use your geo data"
     }
   },
   "days": {
@@ -157,6 +165,16 @@
     "imperial": {
       "speed": "m/h",
       "temp": "F"
+    }
+  },
+  "actions": {
+    "ok": {
+      "ua": "Добре",
+      "en": "Ok"
+    },
+    "cancel": {
+      "ua": "Відміна",
+      "en": "Cancel"
     }
   }
 }

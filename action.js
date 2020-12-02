@@ -78,7 +78,6 @@ export const setLocation = (source, location = null) => {
             location = await RNLocation.getLatestLocation({ timeout: 5000 });
           } else {
             location = await APIHelper.fetchIPData();
-            console.log(location)
             source = GeoSource.IP;
           }
         }
