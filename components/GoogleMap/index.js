@@ -1,23 +1,56 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ColorScheme } from '../../constants';
+import { heightPercentageToDP } from '../../utils/units';
+import { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView from 'react-native-maps';
+import PropTypes from 'prop-types';
 import { GeoSource } from '../../constants';
 import { connect } from 'react-redux';
-import GoogleMap from './GoogleMap';
 import { setWeather, setLocation } from '../../action';
-import PropTypes from 'prop-types';
 
 function GoogleMapContainer(props) {
-  const onLocationChange = (source, location = null) => {
-    props.setLocation(source, location)
+  const map = useRef(null);
+  const [region, setRegion] = useState({
+    latitudeDelta: 0.2,
+    longitudeDelta: 0.2,
+    latitude: props.location.latitude,
+    longitude: props.location.longitude
+  });
+
+  useEffect(() => {
+    setRegion({
+      ...region,
+      latitude: props.location.latitude,
+      longitude: props.location.longitude
+    })
+
+    map.current.animateCamera({
+      center: props.location,
+      heading: 0,
+      pitch: 0
+    });
+  }, [props.location]);
+
+
+  const onPress = ({ nativeEvent }) => {
+    props.setLocation(GeoSource.STATIC, nativeEvent.coordinate)
   };
 
   return (
-    <GoogleMap
-      marker={props.marker}
-      location={props.location}
-      onClick={location => {
-        onLocationChange(GeoSource.STATIC, location);
-      }}
-    />
+    <MapView
+      provider={PROVIDER_GOOGLE}
+      showsTraffic={false}
+      loadingEnabled={true}
+      customMapStyle={props.colorScheme === ColorScheme.DARK ? mapStyle : null}
+      ref={map}
+      initialRegion={region}
+      region={region}
+      onRegionChangeComplete={setRegion}
+      style={{ height: heightPercentageToDP(40) }}
+      onPoiClick={onPress}
+      onPress={onPress}>
+      <Marker coordinate={props.marker} />
+    </MapView>
   );
 }
 
@@ -41,7 +74,8 @@ GoogleMapContainer.propTypes = {
     longitude: PropTypes.number,
     latitude: PropTypes.number,
   }),
-  setLocation: PropTypes.func
+  setLocation: PropTypes.func,
+  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT])
 }
 
 export default connect(
