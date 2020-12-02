@@ -1,15 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Color } from '../../constants';
+import { View } from 'react-native';
+import { Color, ColorScheme } from '../../constants';
 import Tab from './Tab';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-function TabBar(props) {
-  const styles = getStyles(props);
+function TabBar({ colorScheme, config, style, ...props }) {
 
-  const tabs = props.config.children.map((tab, index) => (
+  const tabs = config.children.map((tab, index) => (
     <Tab
-      style={styles.tab}
       key={tab.component.id}
       component={tab.component.id}
       index={index}
@@ -17,29 +16,28 @@ function TabBar(props) {
     />
   ));
 
-  return <View style={[props.style, styles.container]}>{tabs}</View>;
-}
-
-const getStyles = props => (
-  StyleSheet.create({
-    container: {
+  return (
+    <View style={[style, {
       flexDirection: 'row',
       height: 60,
       justifyContent: 'space-around',
-      backgroundColor: Color[props.colorScheme].TAB_BAR,
-    },
-  })
-);
-
-TabBar.defaultProps = {
-  config: {
-    children: [],
-    options: {},
-  },
-};
+      backgroundColor: Color[colorScheme].TAB_BAR,
+    }]}>{tabs}</View>
+  );
+}
 
 const mapStateToProps = state => ({
   colorScheme: state.colorScheme,
 });
+
+TabBar.propTypes = {
+  config: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.shape({
+      component: PropTypes.object
+    }))
+  }),
+  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
+  style: PropTypes.object
+}
 
 export default connect(mapStateToProps)(TabBar);

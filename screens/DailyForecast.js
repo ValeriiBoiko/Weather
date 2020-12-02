@@ -7,13 +7,14 @@ import WeatherDisplay from '../components/WeatherDisplay';
 import DetailWeatherInfo from '../components/DetailWeatherInfo';
 import { common } from '../styles/common';
 import ScreenWrapper from '../components/ScreenWrapper';
-import { setLocation, setWeather } from '../action';
+import { setLocation, setScreenAction, setWeather } from '../action';
 import PropTypes from 'prop-types';
 
 function DailyForecast(props) {
   const styles = getStyles(props);
 
   useEffect(() => {
+    props.setScreen();
     if (!props.location.latitude || !props.location.latitude) {
       props.setLocation(props.geoSource);
     }
@@ -65,7 +66,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setWeather: (location, unit, lang) => dispatch(setWeather(location, unit, lang)),
-  setLocation: (source) => dispatch(setLocation(source))
+  setLocation: (source) => dispatch(setLocation(source)),
+  setScreen: () => dispatch(setScreenAction('screen.DailyForecast')),
 });
 
 DailyForecast.propTypes = {
