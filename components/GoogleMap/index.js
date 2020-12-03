@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { GeoSource } from '../../constants';
 import { connect } from 'react-redux';
 import { setWeather, setLocation } from '../../action';
+import mapStyle from '../../styles/map';
 
 function GoogleMapContainer(props) {
   const map = useRef(null);

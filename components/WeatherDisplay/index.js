@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: '5%',
     paddingBottom: widthPercentageToDP(2.5),
-    paddingTop: 10,
   },
   image: {
     bottom: 0,

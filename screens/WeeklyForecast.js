@@ -3,14 +3,15 @@ import { View, StyleSheet } from 'react-native';
 import { Color, ColorScheme } from '../constants';
 import { connect } from 'react-redux';
 import { common } from '../styles/common';
-import { heightPercentageToDP } from '../utils/units';
 import WeatherDisplay from '../components/WeatherDisplay';
 import DailyShortForecast from '../components/DailyLineForecast';
 import ScreenWrapper from '../components/ScreenWrapper';
 import PropTypes from 'prop-types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function WeeklyForecast({ weather, theme, colorScheme, ...props }) {
   const styles = useMemo(() => getStyles(colorScheme), [colorScheme]);
+  const insets = useSafeAreaInsets();
   const dailyForecast = Object.values(weather).map(
     (item, index, values) => {
       const isLastDay = index === values.length - 1;
@@ -20,25 +21,21 @@ function WeeklyForecast({ weather, theme, colorScheme, ...props }) {
   );
 
   return (
-    <ScreenWrapper
-      headerColor={theme.backgroundColor}
-      bodyColor={Color[colorScheme].WHITE}
-      footerColor={Color[colorScheme].TAB_BAR}
-      render={availableHeight => (
-        <View style={common.flex}>
-          <View
-            style={[
-              {
-                backgroundColor: theme.backgroundColor,
-                height: heightPercentageToDP(40, availableHeight)
-              },
-            ]}>
-            <WeatherDisplay compact={true} />
-          </View>
-          {dailyForecast}
+    <ScreenWrapper scrollable={false}>
+      <View style={common.flex}>
+        <View
+          style={[
+            {
+              backgroundColor: theme.backgroundColor,
+              paddingTop: insets.top ? insets.top : 10,
+              flex: 1,
+            }
+          ]}>
+          <WeatherDisplay compact={true} />
         </View>
-      )}
-    />
+        {dailyForecast}
+      </View>
+    </ScreenWrapper>
   );
 }
 
@@ -48,13 +45,11 @@ const getStyles = colorScheme =>
       borderBottomColor: Color[colorScheme].SEPARATOR,
       borderBottomWidth: 1,
       marginHorizontal: '5%',
-      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
     },
     lastDayLine: {
       marginHorizontal: '5%',
-      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
     },

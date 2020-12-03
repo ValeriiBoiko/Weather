@@ -62,10 +62,10 @@ const getStyles = colorScheme => (
       flexWrap: 'wrap',
       backgroundColor: Color[colorScheme].WHITE,
       alignContent: 'stretch',
-      flex: 1,
     },
     item: {
       minWidth: '50%',
+      height: 90
     },
   })
 );

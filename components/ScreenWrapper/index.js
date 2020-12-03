@@ -1,34 +1,28 @@
-import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import { bottomTabsConfig } from '../../navigation/bottomTabs';
-import { common } from '../../styles/common';
 import TabBar from '../TabBar';
 
 function ScreenWrapper(props) {
-  const [height, setHeight] = useState(0);
-  const styles = getStyles(props);
 
   return (
-    <View style={common.flex}>
-      <SafeAreaView style={styles.headerColor} />
-      <SafeAreaView
-        style={[styles.bodyColor, common.flex]}
-        onLayout={e => setHeight(e.nativeEvent.layout.height)}>
-        <ScrollView contentContainerStyle={common.flex} bounces={false}>
-          {props.render ? props.render(height) : props.children}
-        </ScrollView>
-
-        <TabBar config={bottomTabsConfig()} />
-      </SafeAreaView>
-      <SafeAreaView style={styles.footerColor} />
+    <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}
+        bounces={props.scrollable ? true : false}
+        contentInsetAdjustmentBehavior={'never'}
+        contentOffset={{ y: 0 }}
+        contentContainerStyle={{
+          flex: props.scrollable ? 0 : 1,
+        }} >
+        {props.children}
+      </ScrollView>
+      <TabBar config={bottomTabsConfig()} />
     </View>
   );
 }
 
 ScreenWrapper.defaultProps = {
-  headerColor: '#fff',
-  bodyColor: '#fff',
-  footerColor: '#fff',
+  scrollable: true
 };
 
 const getStyles = props => (

@@ -4,8 +4,10 @@ import { Color, ColorScheme } from '../../constants';
 import Tab from './Tab';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function TabBar({ colorScheme, config, style, ...props }) {
+  const bottomInset = useSafeAreaInsets().bottom;
 
   const tabs = config.children.map((tab, index) => (
     <Tab
@@ -19,7 +21,8 @@ function TabBar({ colorScheme, config, style, ...props }) {
   return (
     <View style={[style, {
       flexDirection: 'row',
-      height: 60,
+      height: 60 + bottomInset,
+      paddingBottom: bottomInset,
       justifyContent: 'space-around',
       backgroundColor: Color[colorScheme].TAB_BAR,
     }]}>{tabs}</View>

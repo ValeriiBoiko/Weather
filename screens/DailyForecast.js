@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Color, ColorScheme, GeoSource, Language, Unit } from '../constants';
-import { heightPercentageToDP } from '../utils/units';
+import { ColorScheme, GeoSource, Language, Unit } from '../constants';
 import { connect } from 'react-redux';
 import WeatherDisplay from '../components/WeatherDisplay';
 import DetailWeatherInfo from '../components/DetailWeatherInfo';
@@ -9,9 +8,11 @@ import { common } from '../styles/common';
 import ScreenWrapper from '../components/ScreenWrapper';
 import { setLocation, setScreenAction, setWeather } from '../action';
 import PropTypes from 'prop-types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function DailyForecast(props) {
   const styles = getStyles(props);
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     props.setScreen();
@@ -27,22 +28,20 @@ function DailyForecast(props) {
   }, [props.location])
 
   return (
-    <ScreenWrapper
-      headerColor={props.theme.backgroundColor}
-      bodyColor={Color[props.colorScheme].WHITE}
-      footerColor={Color[props.colorScheme].TAB_BAR}
-      render={availableHeight => (
-        <View style={common.flex}>
-          <View style={[
-            styles.weatherDisplayContainer,
-            { height: heightPercentageToDP(70, availableHeight) }
-          ]}>
-            <WeatherDisplay />
-          </View>
-          <DetailWeatherInfo />
+    <ScreenWrapper scrollable={false}>
+      <View style={common.flex}>
+        <View style={[
+          styles.weatherDisplayContainer,
+          {
+            paddingTop: insets.top ? insets.top : 10,
+            flex: 1.
+          }
+        ]}>
+          <WeatherDisplay />
         </View>
-      )}
-    />
+        <DetailWeatherInfo />
+      </View>
+    </ScreenWrapper>
   );
 }
 
