@@ -3,6 +3,28 @@ export const ColorScheme = {
   LIGHT: 'light',
 };
 
+export const DarkTheme = {
+  sunnyDay: '#f8a057',
+  clearDay: '#5eb5c9',
+  cloudyDay: '#738e97',
+  night: '#293551',
+  primary: '#5eb5c9',
+  background: '#171717',
+  text: '#eee',
+  border: '#212121'
+};
+
+export const LightTheme = {
+  sunnyDay: '#f8a057',
+  clearDay: '#5eb5c9',
+  cloudyDay: '#738e97',
+  night: '#293551',
+  primary: '#5eb5c9',
+  background: '#fff',
+  text: '#333',
+  border: '#e7e7e8'
+}
+
 export const Color = {
   ORANGE: '#f8a057',
   CYAN: '#5eb5c9',
@@ -160,3 +182,9 @@ export const Language = {
   EN: 'en',
   UA: 'ua',
 };
+
+export const Screen = {
+  WEATHER_TODAY: 'screen.DailyForecast',
+  WEEKLY_FORECAST: 'screen.WeeklyForecast',
+  SETTINGS: 'screen.Settings'
+}

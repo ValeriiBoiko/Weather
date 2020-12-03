@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Color } from '../../constants';
 import { widthDependedPixel } from '../../utils/units';
 import Touchable from '../../ui/Touchable';
 import Icon from '../../ui/Icon/Icon';
-import { connect } from 'react-redux';
+import useTheme from '../../theming/useTheme';
 
-function ButtonGroup(props) {
-  const [activeButton, setActiveButton] = useState(props.selected);
+function ButtonGroup({ selected, activeBackground, buttons, ...props }) {
+  const [activeButton, setActiveButton] = useState(selected);
 
-  if (activeButton !== props.selected) {
-    setActiveButton(props.selected);
+  if (activeButton !== selected) {
+    setActiveButton(selected);
   }
 
-  const styles = getStyles(props);
-  const activeStyle = [styles.groupButton, styles.activeGroupButton];
+  const colors = useTheme();
+  const styles = useMemo(() => getStyles(colors), [colors]);
+  const activeStyle = [styles.groupButton, {
+    backgroundColor: activeBackground,
+  }];
 
-  const buttons = props.buttons.map(button => {
+  const renderedButtons = buttons.map(button => {
     const isActive = button.value === activeButton;
     const style = isActive ? activeStyle : styles.groupButton;
     const valueStyle = isActive ? styles.contentActiveColor : styles.contentColor;
@@ -29,23 +31,23 @@ function ButtonGroup(props) {
           setActiveButton(button.value);
           props.onValueChange(button.value);
         }}>
-        {button.icon && <Icon name={button.icon} size={props.size} style={valueStyle} />}
+        {button.icon && <Icon name={button.icon} size={widthDependedPixel(30)} style={valueStyle} />}
         {button.label && <Text style={valueStyle}>{button.label}</Text>}
       </Touchable>
     );
   });
 
-  return <View style={styles.buttonGroup}>{buttons}</View>;
+  return <View style={styles.buttonGroup}>{renderedButtons}</View>;
 }
 
-const getStyles = props => (
+const getStyles = colors => (
   StyleSheet.create({
     buttonGroup: {
       flexDirection: 'row',
       alignItems: 'stretch',
       borderRadius: widthDependedPixel(7),
       overflow: 'hidden',
-      borderColor: Color[props.colorScheme].CYAN,
+      borderColor: colors.primary,
       borderWidth: 1
     },
     groupButton: {
@@ -54,27 +56,13 @@ const getStyles = props => (
       alignItems: 'center',
       height: widthDependedPixel(35),
     },
-    activeGroupButton: {
-      backgroundColor: props.activeBackground,
-    },
     contentColor: {
-      color: Color[props.colorScheme].BLACK,
+      color: colors.text,
     },
     contentActiveColor: {
-      color: Color[props.colorScheme].WHITE,
+      color: '#fff',
     },
   })
 );
 
-ButtonGroup.defaultProps = {
-  size: widthDependedPixel(30),
-  buttons: [],
-};
-
-const mapStateToProps = (state, props) => ({
-  colorScheme: state.colorScheme,
-  background: props.background || Color[state.colorScheme].TAB_BAR,
-  activeBackground: props.activeBackground || Color[state.colorScheme].CYAN,
-});
-
-export default connect(mapStateToProps)(ButtonGroup);
+export default ButtonGroup;

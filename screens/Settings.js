@@ -1,5 +1,5 @@
 import React from 'react';
-import { Color, ColorScheme, GeoSource, Language, Unit } from '../constants';
+import { ColorScheme, DarkTheme, GeoSource, Language, LightTheme, Unit } from '../constants';
 import { batch, connect } from 'react-redux';
 import ButtonGroup from '../components/ButtonGroup';
 import { setLanguageAction, setUnitAction, setWeather, setLocation, setColorSchemeAction } from '../action';
@@ -11,8 +11,11 @@ import { getLocationSources, getUnits, getLanguages, getColorSchemes } from '../
 import PropTypes from 'prop-types';
 import { Alert, Linking } from 'react-native';
 import Permission from '../utils/Permission';
+import useTheme from '../theming/useTheme';
+import ThemeProvider from '../theming/ThemeProvider';
 
 function Settings(props) {
+  const colors = useTheme();
   const locationButtons = getLocationSources(props.lang);
   const unitsButtons = getUnits(props.lang);
   const languageButtons = getLanguages(props.lang);
@@ -53,44 +56,47 @@ function Settings(props) {
   };
 
   return (
-    <ScreenWrapper
-      headerColor={Color[props.colorScheme].WHITE}
-      bodyColor={Color[props.colorScheme].WHITE}
-      footerColor={Color[props.colorScheme].TAB_BAR}>
-      <GoogleMap />
+    <ThemeProvider value={props.colorScheme === ColorScheme.DARK ? DarkTheme : LightTheme}>
+      <ScreenWrapper>
+        <GoogleMap />
 
-      <SettingRow title={data.phrase.locationSource[props.lang]}>
-        <ButtonGroup
-          buttons={locationButtons}
-          onValueChange={onLocationChange}
-          selected={props.locationSource}
-        />
-      </SettingRow>
+        <SettingRow title={data.phrase.locationSource[props.lang]}>
+          <ButtonGroup
+            buttons={locationButtons}
+            onValueChange={onLocationChange}
+            selected={props.locationSource}
+            activeBackground={colors.primary}
+          />
+        </SettingRow>
 
-      <SettingRow title={data.phrase.unitsFormat[props.lang]}>
-        <ButtonGroup
-          buttons={unitsButtons}
-          onValueChange={onUnitChange}
-          selected={props.unitSystem}
-        />
-      </SettingRow>
+        <SettingRow title={data.phrase.unitsFormat[props.lang]}>
+          <ButtonGroup
+            buttons={unitsButtons}
+            onValueChange={onUnitChange}
+            selected={props.unitSystem}
+            activeBackground={colors.primary}
+          />
+        </SettingRow>
 
-      <SettingRow title={data.phrase.languageLabel[props.lang]}>
-        <ButtonGroup
-          buttons={languageButtons}
-          onValueChange={onLanguageChange}
-          selected={props.lang}
-        />
-      </SettingRow>
+        <SettingRow title={data.phrase.languageLabel[props.lang]}>
+          <ButtonGroup
+            buttons={languageButtons}
+            onValueChange={onLanguageChange}
+            selected={props.lang}
+            activeBackground={colors.primary}
+          />
+        </SettingRow>
 
-      <SettingRow title={data.phrase.themeLabel[props.lang]}>
-        <ButtonGroup
-          buttons={colorButtons}
-          onValueChange={props.setColorScheme}
-          selected={props.colorScheme}
-        />
-      </SettingRow>
-    </ScreenWrapper>
+        <SettingRow title={data.phrase.themeLabel[props.lang]}>
+          <ButtonGroup
+            buttons={colorButtons}
+            activeBackground={colors.primary}
+            onValueChange={props.setColorScheme}
+            selected={props.colorScheme}
+          />
+        </SettingRow>
+      </ScreenWrapper>
+    </ThemeProvider>
   );
 }
 
@@ -100,7 +106,7 @@ const mapStateToProps = state => ({
   locationSource: state.locationSource,
   location: state.location,
   lang: state.lang,
-  colorScheme: state.colorScheme,
+  colorScheme: state.colorScheme
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -108,23 +114,22 @@ const mapDispatchToProps = dispatch => ({
   setWeather: (location, unit, lang) => dispatch(setWeather(location, unit, lang)),
   setUnitSystem: value => dispatch(setUnitAction(value)),
   setLanguage: lang => dispatch(setLanguageAction(lang)),
-  setColorScheme: color => dispatch(setColorSchemeAction(color)),
+  setColorScheme: colorScheme => dispatch(setColorSchemeAction(colorScheme))
 });
 
 Settings.propTypes = {
   lang: PropTypes.oneOf([Language.EN, Language.UA]).isRequired,
-  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
   unitSystem: PropTypes.oneOf([Unit.IMPERIAL, Unit.METRIC]).isRequired,
   location: PropTypes.shape({
     latitude: PropTypes.number,
     longitude: PropTypes.number,
   }),
   locationSource: PropTypes.oneOf([GeoSource.GPS, GeoSource.IP, GeoSource.STATIC]).isRequired,
+  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
   setLocation: PropTypes.func.isRequired,
   setWeather: PropTypes.func.isRequired,
   setUnitSystem: PropTypes.func.isRequired,
   setLanguage: PropTypes.func.isRequired,
-  setColorScheme: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

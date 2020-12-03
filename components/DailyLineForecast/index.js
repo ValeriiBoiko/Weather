@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import Icon from '../../ui/Icon/Icon';
-import { Color, Font, IconsMap } from '../../constants';
+import { Font, IconsMap } from '../../constants';
 import { common } from '../../styles/common';
 import { widthDependedPixel } from '../../utils/units';
 import { titleCase } from '../../utils';
-import { connect } from 'react-redux';
+import useTheme from '../../theming/useTheme';
 
-function DailyForecast(props) {
-  const styles = getStyles(props);
+function DailyLineForecast(props) {
+  const colors = useTheme();
+  const styles = useMemo(() => getStyles(colors), [colors]);
   let data = props.data;
 
   return (
-    <View style={[props.style]}>
+    <View style={[styles.item, props.style]}>
       <Icon
         style={styles.icon}
         name={IconsMap[data.icon].icon}
@@ -27,35 +28,38 @@ function DailyForecast(props) {
   );
 }
 
-const getStyles = props => (
+const getStyles = colors => (
   StyleSheet.create({
+    item: {
+      borderBottomColor: colors.border,
+      borderBottomWidth: 1,
+      marginHorizontal: '5%',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
     icon: {
       flex: 2,
-      color: Color[props.colorScheme].BLACK,
+      color: colors.text,
     },
     day: {
       ...common.regularText,
-      color: Color[props.colorScheme].BLACK,
+      color: colors.text,
       paddingLeft: '2%',
       flex: 2,
     },
     temp: {
       ...common.regularText,
-      color: Color[props.colorScheme].BLACK,
+      color: colors.text,
       fontFamily: Font.COMFORTAA_SEMIBOLD,
       flex: 3,
     },
     title: {
       ...common.regularText,
-      color: Color[props.colorScheme].BLACK,
+      color: colors.text,
       flex: 5,
       flexWrap: 'wrap',
     },
   })
 );
 
-const mapStateToProps = state => ({
-  colorScheme: state.colorScheme,
-});
-
-export default connect(mapStateToProps)(DailyForecast);
+export default DailyLineForecast;

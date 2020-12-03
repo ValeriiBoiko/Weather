@@ -46,7 +46,6 @@ function GoogleMapContainer(props) {
       ref={map}
       initialRegion={region}
       region={region}
-      onRegionChangeComplete={setRegion}
       style={{ height: heightPercentageToDP(40) }}
       onPoiClick={onPress}
       onPress={onPress}>

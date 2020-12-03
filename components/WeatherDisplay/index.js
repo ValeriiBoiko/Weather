@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import RNImage from '../../ui/Image';
-import { Color, Font, IconsMap } from '../../constants';
+import { Font, IconsMap } from '../../constants';
 import { widthDependedPixel, widthPercentageToDP, heightDependedPixel, calcWidth } from '../../utils/units';
 import { connect } from 'react-redux';
 import Icon from '../../ui/Icon/Icon';
@@ -38,7 +38,7 @@ function WeatherDisplay(props) {
           <Icon
             size={widthDependedPixel(120)}
             name={IconsMap[props.weather.icon].icon}
-            color={Color.WHITE}
+            color={'#fff'}
           />
         </View>
 
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   city: {
     flexWrap: 'wrap',
-    color: Color.WHITE,
+    color: '#fff',
     fontSize: widthDependedPixel(24),
     lineHeight: widthDependedPixel(30),
     fontFamily: Font.COMFORTAA_REGULAR,
@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
     fontFamily: Font.COMFORTAA_REGULAR,
     lineHeight: widthDependedPixel(19),
     fontSize: widthDependedPixel(15),
-    color: Color.WHITE,
+    color: '#fff',
   },
   weather: {
-    color: Color.WHITE,
+    color: '#fff',
     fontSize: widthDependedPixel(16),
     lineHeight: widthDependedPixel(20),
     paddingTop: heightDependedPixel(4),
@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   temperature: {
-    color: Color.WHITE,
+    color: '#fff',
     fontSize: widthDependedPixel(75),
     fontFamily: Font.COMFORTAA_MEDIUM,
     lineHeight: widthDependedPixel(100),
   },
   unit: {
-    color: Color.WHITE,
+    color: '#fff',
     fontSize: widthDependedPixel(35),
     lineHeight: widthDependedPixel(43),
     fontFamily: Font.COMFORTAA_SEMIBOLD,

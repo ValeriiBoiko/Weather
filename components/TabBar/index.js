@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Color, ColorScheme } from '../../constants';
 import Tab from './Tab';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import useTheme from '../../theming/useTheme';
 
-function TabBar({ colorScheme, config, style, ...props }) {
+function TabBar({ config, style, ...props }) {
+  const colors = useTheme();
   const bottomInset = useSafeAreaInsets().bottom;
 
   const tabs = config.children.map((tab, index) => (
@@ -24,14 +24,10 @@ function TabBar({ colorScheme, config, style, ...props }) {
       height: 60 + bottomInset,
       paddingBottom: bottomInset,
       justifyContent: 'space-around',
-      backgroundColor: Color[colorScheme].TAB_BAR,
+      backgroundColor: colors.border,
     }]}>{tabs}</View>
   );
 }
-
-const mapStateToProps = state => ({
-  colorScheme: state.colorScheme,
-});
 
 TabBar.propTypes = {
   config: PropTypes.shape({
@@ -39,8 +35,7 @@ TabBar.propTypes = {
       component: PropTypes.object
     }))
   }),
-  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
   style: PropTypes.object
 }
 
-export default connect(mapStateToProps)(TabBar);
+export default TabBar;

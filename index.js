@@ -11,7 +11,9 @@ import { bottomTabsConfig } from './navigation/bottomTabs';
 import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import Settings from './screens/Settings';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PersistGate } from 'redux-persist/integration/react';
 
 let persistConfig = {
   key: 'root',
@@ -19,22 +21,28 @@ let persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
+const store = createStore(persistedReducer, applyMiddleware(thunk));
 
-persistStore(store, {}, bootstrapNavigation);
+const persistor = persistStore(store, {}, bootstrapNavigation);
 
 function ReduxProvider(Component) {
-  return props => (
-    <Provider store={store}>
-      <Component {...props} />
-    </Provider>
-  );
+  return props => {
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <SafeAreaProvider>
+            <Component {...props} />
+          </SafeAreaProvider>
+        </PersistGate>
+      </Provider>
+    )
+  };
 }
 
 function bootstrapNavigation() {
-  Navigation.registerComponent(`screen.DailyForecast`, () => ReduxProvider(DailyForecast), () => DailyForecast);
-  Navigation.registerComponent(`screen.WeeklyForecast`, () => ReduxProvider(WeeklyForecast), () => WeeklyForecast);
-  Navigation.registerComponent(`screen.Settings`, () => ReduxProvider(Settings), () => Settings);
+  Navigation.registerComponent('screen.DailyForecast', () => ReduxProvider(DailyForecast), () => DailyForecast);
+  Navigation.registerComponent('screen.WeeklyForecast', () => ReduxProvider(WeeklyForecast), () => WeeklyForecast);
+  Navigation.registerComponent('screen.Settings', () => ReduxProvider(Settings), () => Settings);
 
   Navigation.setDefaultOptions({
     bottomTabs: {

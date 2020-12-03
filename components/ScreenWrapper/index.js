@@ -1,19 +1,23 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View } from 'react-native';
+import { connect } from 'react-redux';
 import { bottomTabsConfig } from '../../navigation/bottomTabs';
+import useTheme from '../../theming/useTheme';
 import TabBar from '../TabBar';
 
 function ScreenWrapper(props) {
+  const colors = useTheme();
 
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}
-        bounces={props.scrollable ? true : false}
+        bounces={false}
         contentInsetAdjustmentBehavior={'never'}
         contentOffset={{ y: 0 }}
-        contentContainerStyle={{
+        contentContainerStyle={[props.style, {
           flex: props.scrollable ? 0 : 1,
-        }} >
+          backgroundColor: colors.background
+        }]} >
         {props.children}
       </ScrollView>
       <TabBar config={bottomTabsConfig()} />
@@ -25,18 +29,8 @@ ScreenWrapper.defaultProps = {
   scrollable: true
 };
 
-const getStyles = props => (
-  StyleSheet.create({
-    headerColor: {
-      backgroundColor: props.headerColor,
-    },
-    bodyColor: {
-      backgroundColor: props.bodyColor,
-    },
-    footerColor: {
-      backgroundColor: props.footerColor,
-    },
-  })
-);
+const mapStateToProps = (state) => ({
+  colorScheme: state.colorScheme
+});
 
-export default ScreenWrapper;
+export default connect(mapStateToProps)(ScreenWrapper);

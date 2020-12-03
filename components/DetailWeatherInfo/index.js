@@ -2,10 +2,11 @@ import React, { useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Item from './Item';
 import { widthDependedPixel } from '../../utils/units';
-import { Color, ColorScheme, Language, Unit } from '../../constants';
+import { Language, Unit } from '../../constants';
 import { connect } from 'react-redux';
 import data from '../../localization.json';
 import PropTypes from 'prop-types';
+import useTheme from '../../theming/useTheme';
 
 function millisecondsToTime(ms) {
   const date = new Date(ms);
@@ -15,8 +16,9 @@ function millisecondsToTime(ms) {
   return `${hour}:${minutes}`;
 }
 
-function DetailWeatherInfo({ sunrise, sunset, unitSystem, lang, colorScheme, weather, ...props }) {
-  const styles = useMemo(() => getStyles(colorScheme), [colorScheme]);
+function DetailWeatherInfo({ sunrise, sunset, unitSystem, lang, weather, ...props }) {
+  const colors = useTheme();
+  const styles = useMemo(() => getStyles(colors), [colors]);
   const iconSize = widthDependedPixel(65);
   const sunriseTime = sunrise ? millisecondsToTime(sunrise) : 'n/a';
   const sunsetTime = sunset ? millisecondsToTime(sunset) : 'n/a';
@@ -55,12 +57,12 @@ function DetailWeatherInfo({ sunrise, sunset, unitSystem, lang, colorScheme, wea
   );
 }
 
-const getStyles = colorScheme => (
+const getStyles = colors => (
   StyleSheet.create({
     container: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      backgroundColor: Color[colorScheme].WHITE,
+      backgroundColor: colors.background,
       alignContent: 'stretch',
     },
     item: {
@@ -75,7 +77,6 @@ const mapStateToProps = state => ({
   sunset: state.weather.sunset,
   sunrise: state.weather.sunrise,
   lang: state.lang,
-  colorScheme: state.colorScheme,
   unitSystem: state.unitSystem,
 });
 
@@ -85,7 +86,6 @@ DetailWeatherInfo.propTypes = {
   sunset: PropTypes.number.isRequired,
   sunrise: PropTypes.number.isRequired,
   lang: PropTypes.oneOf([Language.EN, Language.UA]).isRequired,
-  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
   unitSystem: PropTypes.oneOf([Unit.IMPERIAL, Unit.METRIC]).isRequired,
 };
 

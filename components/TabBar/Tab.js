@@ -3,7 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setScreenAction } from '../../action';
-import { Color, ColorScheme, Font } from '../../constants';
+import { Color, Font } from '../../constants';
 import { View } from 'react-native';
 import Icon from '../../ui/Icon/Icon';
 import { Text } from 'react-native';
@@ -11,9 +11,11 @@ import { common } from '../../styles/common';
 import { StyleSheet } from 'react-native';
 import { heightDependedPixel } from '../../utils/units';
 import { TouchableWithoutFeedback } from 'react-native';
+import useTheme from '../../theming/useTheme';
 
-function Tab({ options, component, currentScreen, index, colorScheme, ...props }) {
-  const styles = useMemo(() => getStyles(colorScheme), [colorScheme]);
+function Tab({ options, component, currentScreen, index, ...props }) {
+  const colors = useTheme();
+  const styles = useMemo(() => getStyles(colors), [colors]);
   const isActive = component === currentScreen;
   let iconStyle = {};
   let labelStyle = {};
@@ -44,7 +46,7 @@ function Tab({ options, component, currentScreen, index, colorScheme, ...props }
   );
 }
 
-const getStyles = colorScheme => (
+const getStyles = colors => (
   StyleSheet.create({
     tab: {
       flex: 1,
@@ -54,13 +56,13 @@ const getStyles = colorScheme => (
     label: {
       lineHeight: 12,
       fontSize: 12,
-      color: Color[colorScheme].BLACK,
+      color: colors.text
     },
     icon: {
       marginBottom: -4,
       fontSize: heightDependedPixel(35),
       lineHeight: 35,
-      color: Color[colorScheme].BLACK,
+      color: colors.text,
     },
   })
 )
@@ -68,7 +70,6 @@ const getStyles = colorScheme => (
 
 const mapStateToProps = state => ({
   currentScreen: state.currentScreen,
-  colorScheme: state.colorScheme
 });
 
 const mapDispatchToScreen = dispatch => ({
@@ -85,7 +86,6 @@ Tab.defaultProps = {
 Tab.propTypes = {
   style: PropTypes.object,
   currentScreen: PropTypes.string,
-  colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
   component: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   options: PropTypes.shape({

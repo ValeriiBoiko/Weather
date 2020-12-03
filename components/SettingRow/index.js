@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Color } from '../../constants';
 import { widthDependedPixel } from '../../utils/units';
 import { connect } from 'react-redux';
 import { common } from '../../styles/common';
+import useTheme from '../../theming/useTheme';
 
 function SettingRow(props) {
-  const styles = getStyles(props);
+  const colors = useTheme();
+  const styles = useMemo(() => getStyles(colors), [colors]);
 
   return (
     <View style={styles.settingRow}>
@@ -18,28 +19,27 @@ function SettingRow(props) {
   );
 }
 
-const getStyles = props => (
+const getStyles = colors => (
   StyleSheet.create({
     settingRow: {
       marginHorizontal: '4%',
       marginVertical: widthDependedPixel(15),
     },
     settingTitle: {
-      borderBottomColor: Color[props.colorScheme].BLACK,
+      borderBottomColor: colors.text,
       borderBottomWidth: 1,
       paddingBottom: widthDependedPixel(5),
       marginBottom: widthDependedPixel(15),
     },
     settingTitleText: {
       ...common.largerText,
-      color: Color[props.colorScheme].BLACK,
+      color: colors.text,
     },
   })
 );
 
 const mapStateToProps = state => ({
   lang: state.lang,
-  colorScheme: state.colorScheme,
 });
 
 export default connect(mapStateToProps)(SettingRow);
