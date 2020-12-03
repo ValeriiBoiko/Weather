@@ -28,7 +28,7 @@ function DetailWeatherInfo({ sunrise, sunset, unitSystem, lang, colorScheme, wea
         iconName={'temp'}
         iconSize={iconSize}
         title={data.phrase.feelsLike[lang]}
-        value={weather.temp + ' °' + data.units[unitSystem].temp}
+        value={weather.feelsLike + ' °' + data.units[unitSystem].temp}
       />
       <Item
         style={styles.item}

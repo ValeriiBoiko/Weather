@@ -44,7 +44,7 @@ function WeatherDisplay(props) {
 
         <View style={styles.tempContainer}>
           <View style={common.row}>
-            <Text style={styles.temperature}>{Math.round(props.weather.temp) || null}</Text>
+            <Text style={styles.temperature}>{Math.round(props.weather.temp)}</Text>
             <Text style={styles.unit}>
               °{data.units[props.unitSystem].temp}
             </Text>

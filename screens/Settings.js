@@ -1,6 +1,6 @@
 import React from 'react';
 import { Color, ColorScheme, GeoSource, Language, Unit } from '../constants';
-import { connect } from 'react-redux';
+import { batch, connect } from 'react-redux';
 import ButtonGroup from '../components/ButtonGroup';
 import { setLanguageAction, setUnitAction, setWeather, setLocation, setColorSchemeAction } from '../action';
 import data from '../localization.json';
@@ -19,11 +19,17 @@ function Settings(props) {
   const colorButtons = getColorSchemes(props.lang);
 
   const onLanguageChange = lang => {
-    props.setLanguage(lang);
+    batch(() => {
+      props.setLanguage(lang);
+      props.setWeather(props.location, props.unitSystem, lang)
+    })
   };
 
   const onUnitChange = unitSystem => {
-    props.setUnitSystem(unitSystem);
+    batch(() => {
+      props.setUnitSystem(unitSystem);
+      props.setWeather(props.location, unitSystem, props.lang)
+    })
   };
 
   const onLocationChange = async source => {
@@ -109,6 +115,10 @@ Settings.propTypes = {
   lang: PropTypes.oneOf([Language.EN, Language.UA]).isRequired,
   colorScheme: PropTypes.oneOf([ColorScheme.DARK, ColorScheme.LIGHT]).isRequired,
   unitSystem: PropTypes.oneOf([Unit.IMPERIAL, Unit.METRIC]).isRequired,
+  location: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+  }),
   locationSource: PropTypes.oneOf([GeoSource.GPS, GeoSource.IP, GeoSource.STATIC]).isRequired,
   setLocation: PropTypes.func.isRequired,
   setWeather: PropTypes.func.isRequired,
