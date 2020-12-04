@@ -25,31 +25,6 @@ export const LightTheme = {
   border: '#e7e7e8'
 }
 
-export const Color = {
-  ORANGE: '#f8a057',
-  CYAN: '#5eb5c9',
-  DIRTY_BLUE: '#738e97',
-  TAB_BAR: '#e7e7e8',
-  WHITE: '#fff',
-  DARK_BLUE: '#293551',
-  BLUE: '#5996f7',
-  BLACK: '#333',
-  light: {
-    TAB_BAR: '#e7e7e8',
-    SEPARATOR: '#e7e7e8',
-    WHITE: '#f5f5f5',
-    BLACK: '#333',
-    CYAN: '#5eb5c9',
-  },
-  dark: {
-    TAB_BAR: '#212121',
-    SEPARATOR: '#333333',
-    WHITE: '#171717',
-    BLACK: '#eee',
-    CYAN: '#5eb5c9',
-  },
-};
-
 export const GeoSource = {
   GPS: 'GPS',
   IP: 'IP',
@@ -84,92 +59,92 @@ export const IconsMap = {
   '01d': {
     icon: 'sun',
     image: Images.SUNNY_DAY,
-    color: Color.ORANGE,
+    color: LightTheme.sunnyDay,
   },
   '01n': {
     icon: 'moon',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '02d': {
     icon: 'cloudy-day',
     image: Images.CLOUDY_DAY,
-    color: Color.CYAN,
+    color: LightTheme.clearDay,
   },
   '02n': {
     icon: 'cloudy-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '03d': {
     icon: 'cloudy-day',
     image: Images.CLOUDY_DAY,
-    color: Color.CYAN,
+    color: LightTheme.clearDay,
   },
   '03n': {
     icon: 'cloudy-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '04d': {
     icon: 'cloudy-day',
     image: Images.CLOUDY_DAY,
-    color: Color.CYAN,
+    color: LightTheme.clearDay,
   },
   '04n': {
     icon: 'cloudy-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '09d': {
     icon: 'shower-day',
     image: Images.CLOUDY_DAY,
-    color: Color.CYAN,
+    color: LightTheme.clearDay,
   },
   '09n': {
     icon: 'shower-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '10d': {
     icon: 'rainy-day',
     image: Images.RAINY_DAY,
-    color: Color.DIRTY_BLUE,
+    color: LightTheme.cloudyDay,
   },
   '10n': {
     icon: 'rainy-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '11d': {
     icon: 'thunder-day',
     image: Images.RAINY_DAY,
-    color: Color.DIRTY_BLUE,
+    color: LightTheme.cloudyDay,
   },
   '11n': {
     icon: 'thunder-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '13d': {
     icon: 'snowy-day',
     image: Images.CLOUDY_DAY,
-    color: Color.DIRTY_BLUE,
+    color: LightTheme.cloudyDay,
   },
   '13n': {
     icon: 'snowy-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
   '50d': {
     icon: 'mist-day',
     image: Images.CLOUDY_DAY,
-    color: Color.DIRTY_BLUE,
+    color: LightTheme.cloudyDay,
   },
   '50n': {
     icon: 'mist-night',
     image: Images.NIGHT,
-    color: Color.DARK_BLUE,
+    color: LightTheme.night,
   },
 };
 

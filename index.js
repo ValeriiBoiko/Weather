@@ -22,27 +22,24 @@ let persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(persistedReducer, applyMiddleware(thunk));
-
 const persistor = persistStore(store, {}, bootstrapNavigation);
 
-function ReduxProvider(Component) {
-  return props => {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <SafeAreaProvider>
-            <Component {...props} />
-          </SafeAreaProvider>
-        </PersistGate>
-      </Provider>
-    )
-  };
+function withProviders(Component) {
+  return props => (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <SafeAreaProvider>
+          <Component {...props} />
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
+  )
 }
 
 function bootstrapNavigation() {
-  Navigation.registerComponent('screen.DailyForecast', () => ReduxProvider(DailyForecast), () => DailyForecast);
-  Navigation.registerComponent('screen.WeeklyForecast', () => ReduxProvider(WeeklyForecast), () => WeeklyForecast);
-  Navigation.registerComponent('screen.Settings', () => ReduxProvider(Settings), () => Settings);
+  Navigation.registerComponent('screen.DailyForecast', () => withProviders(DailyForecast), () => DailyForecast);
+  Navigation.registerComponent('screen.WeeklyForecast', () => withProviders(WeeklyForecast), () => WeeklyForecast);
+  Navigation.registerComponent('screen.Settings', () => withProviders(Settings), () => Settings);
 
   Navigation.setDefaultOptions({
     bottomTabs: {

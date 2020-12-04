@@ -3,7 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setScreenAction } from '../../action';
-import { Color, Font } from '../../constants';
+import { Font } from '../../constants';
 import { View } from 'react-native';
 import Icon from '../../ui/Icon/Icon';
 import { Text } from 'react-native';

@@ -1,4 +1,4 @@
-import { Color } from "../constants";
+import { LightTheme } from '../constants';
 
 export const bottomTabsConfig = (sources = []) => {
   if (sources.length === 0) {
@@ -15,7 +15,7 @@ export const bottomTabsConfig = (sources = []) => {
             bottomTab: {
               icon: sources[0],
               text: 'Today',
-              selectedIconColor: Color.BLUE,
+              selectedIconColor: LightTheme.primary,
             },
             bottomTabs: {
               drawBehind: true,
@@ -35,7 +35,7 @@ export const bottomTabsConfig = (sources = []) => {
             bottomTab: {
               icon: sources[1],
               text: 'Weekly',
-              selectedIconColor: Color.BLUE,
+              selectedIconColor: LightTheme.primary,
             },
             bottomTabs: {
               drawBehind: true,
@@ -54,7 +54,7 @@ export const bottomTabsConfig = (sources = []) => {
             bottomTab: {
               icon: sources[2],
               text: 'Settings',
-              selectedIconColor: Color.BLUE,
+              selectedIconColor: LightTheme.primary,
             },
             bottomTabs: {
               drawBehind: true,

@@ -1,4 +1,4 @@
-import { Action, Color, IconsMap, Images, GeoSource, ColorScheme, Unit, Language } from '../constants';
+import { Action, IconsMap, Images, GeoSource, ColorScheme, Unit, Language, LightTheme } from '../constants';
 
 const initialState = {
   city: 'n/a',
@@ -28,7 +28,7 @@ const initialState = {
   },
   currentScreen: null,
   displayTheme: {
-    backgroundColor: Color.CYAN,
+    backgroundColor: LightTheme.clearDay,
     backgroundImage: Images.CLOUDY_DAY,
   },
   lang: Language.EN,
