@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ColorScheme, DarkTheme, GeoSource, Language, LightTheme, Unit } from '../constants';
 import { connect } from 'react-redux';
@@ -10,10 +10,12 @@ import { setLocation, setScreenAction, setWeather } from '../action';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ThemeProvider from '../theming/ThemeProvider';
+import Loader from '../components/Loader';
 
 function DailyForecast(props) {
   const styles = getStyles(props);
   const insets = useSafeAreaInsets();
+  const [showLoader, setLoaderFlag] = useState(!props.isEmptyWeather);
 
   useEffect(() => {
     props.setScreen();
@@ -27,6 +29,10 @@ function DailyForecast(props) {
       props.setWeather(props.location, props.unitSystem, props.lang)
     }
   }, [props.location])
+
+  useEffect(() => {
+    setLoaderFlag(!props.isEmptyWeather)
+  }, [props.isEmptyWeather])
 
   return (
     <ThemeProvider value={props.colorScheme === ColorScheme.DARK ? DarkTheme : LightTheme}>
@@ -44,6 +50,15 @@ function DailyForecast(props) {
           <DetailWeatherInfo />
         </View>
       </ScreenWrapper>
+
+      <Loader isVisible={showLoader} label="Loading" style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 60,
+        flex: 1,
+      }} />
     </ThemeProvider>
   );
 }
@@ -58,6 +73,7 @@ const getStyles = props => (
 );
 
 const mapStateToProps = state => ({
+  isEmptyWeather: state.weather.sunrise,
   theme: state.displayTheme,
   unitSystem: state.unitSystem,
   lang: state.lang,
