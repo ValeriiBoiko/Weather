@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Icon from '../../ui/Icon/Icon';
-import { Font, IconsMap } from '../../constants';
-import { common } from '../../styles/common';
-import { widthDependedPixel } from '../../utils/units';
-import { titleCase } from '../../utils';
-import useTheme from '../../theming/useTheme';
+import Icon from './Icon';
+import { Font, IconsMap } from '../constants';
+import { common } from '../styles/common';
+import { widthDependedPixel } from '../utils/units';
+import { titleCase } from '../utils';
+import useTheme from '../theming/useTheme';
 
 function DailyLineForecast(props) {
   const colors = useTheme();

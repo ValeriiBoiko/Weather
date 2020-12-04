@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ColorScheme } from '../../constants';
-import { heightPercentageToDP } from '../../utils/units';
+import { ColorScheme } from '../constants';
+import { heightPercentageToDP } from '../utils/units';
 import { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapView from 'react-native-maps';
 import PropTypes from 'prop-types';
-import { GeoSource } from '../../constants';
+import { GeoSource } from '../constants';
 import { connect } from 'react-redux';
-import { setWeather, setLocation } from '../../action';
-import mapStyle from '../../styles/map';
+import { setWeather, setLocation } from '../action';
+import mapStyle from '../styles/map';
 
-function GoogleMapContainer(props) {
+function GoogleMap(props) {
   const map = useRef(null);
   const [region, setRegion] = useState({
     latitudeDelta: 0.2,
@@ -65,7 +65,7 @@ const mapDispatchToProps = dispatch => ({
   setWeather: (location, unit, lang) => dispatch(setWeather(location, unit, lang)),
 });
 
-GoogleMapContainer.propTypes = {
+GoogleMap.propTypes = {
   location: PropTypes.shape({
     longitude: PropTypes.number,
     latitude: PropTypes.number,
@@ -81,4 +81,4 @@ GoogleMapContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(GoogleMapContainer);
+)(GoogleMap);

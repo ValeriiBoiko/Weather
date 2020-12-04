@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { widthDependedPixel } from '../../utils/units';
+import { widthDependedPixel } from '../utils/units';
 import { connect } from 'react-redux';
-import { common } from '../../styles/common';
-import useTheme from '../../theming/useTheme';
+import { common } from '../styles/common';
+import useTheme from '../theming/useTheme';
 
 function SettingRow(props) {
   const colors = useTheme();

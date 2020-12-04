@@ -1,6 +1,6 @@
 import { TouchableNativeFeedback, View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { isAndroid } from '../../utils';
+import { isAndroid } from '../utils';
 
 function Touchable(props) {
   const touchable = isAndroid ? (

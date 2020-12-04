@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import Icon from '../../../ui/Icon/Icon';
+import Icon from '../../Icon';
 import { Font } from '../../../constants';
 import { widthDependedPixel } from '../../../utils/units';
 import { common } from '../../../styles/common';

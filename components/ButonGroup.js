@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { widthDependedPixel } from '../../utils/units';
-import Touchable from '../../ui/Touchable';
-import Icon from '../../ui/Icon/Icon';
-import useTheme from '../../theming/useTheme';
+import { widthDependedPixel } from '../utils/units';
+import Touchable from './Touchable';
+import Icon from './Icon';
+import useTheme from '../theming/useTheme';
 
 function ButtonGroup({ selected, activeBackground, buttons, ...props }) {
   const [activeButton, setActiveButton] = useState(selected);

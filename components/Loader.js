@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
-import useTheme from '../../theming/useTheme';
-import Icon from '../../ui/Icon/Icon';
+import useTheme from '../theming/useTheme';
+import Icon from './Icon';
 
 function Loader({ isVisible, label, spinnerColor, ...props }) {
   const colors = useTheme();

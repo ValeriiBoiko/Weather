@@ -5,7 +5,6 @@ import { Navigation } from 'react-native-navigation'
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers'
 import { Provider } from 'react-redux';
-import Icon from './ui/Icon/Icon';
 import { heightDependedPixel } from './utils/units';
 import { bottomTabsConfig } from './navigation/bottomTabs';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -14,6 +13,7 @@ import Settings from './screens/Settings';
 import thunk from 'redux-thunk';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { PersistGate } from 'redux-persist/integration/react';
+import Icon from './components/Icon';
 
 let persistConfig = {
   key: 'root',

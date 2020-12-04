@@ -1,7 +1,7 @@
 import React from 'react';
 import { ColorScheme, DarkTheme, GeoSource, Language, LightTheme, Unit } from '../constants';
 import { batch, connect } from 'react-redux';
-import ButtonGroup from '../components/ButtonGroup';
+import ButtonGroup from '../components/ButonGroup';
 import { setLanguageAction, setUnitAction, setWeather, setLocation, setColorSchemeAction } from '../action';
 import data from '../localization.json';
 import GoogleMap from '../components/GoogleMap';

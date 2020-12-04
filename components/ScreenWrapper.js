@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { bottomTabsConfig } from '../../navigation/bottomTabs';
-import useTheme from '../../theming/useTheme';
-import TabBar from '../TabBar';
+import { bottomTabsConfig } from '../navigation/bottomTabs';
+import useTheme from '../theming/useTheme';
+import TabBar from './TabBar';
 
 function ScreenWrapper(props) {
   const colors = useTheme();

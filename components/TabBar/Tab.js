@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { setScreenAction } from '../../action';
 import { Font } from '../../constants';
 import { View } from 'react-native';
-import Icon from '../../ui/Icon/Icon';
+import Icon from '../Icon';
 import { Text } from 'react-native';
 import { common } from '../../styles/common';
 import { StyleSheet } from 'react-native';

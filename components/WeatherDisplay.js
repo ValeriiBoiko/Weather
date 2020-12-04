@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import RNImage from '../../ui/Image';
-import { Font, IconsMap } from '../../constants';
-import { widthDependedPixel, widthPercentageToDP, heightDependedPixel, calcWidth } from '../../utils/units';
+import RNImage from './Image';
+import { Font, IconsMap } from '../constants';
+import { widthDependedPixel, widthPercentageToDP, heightDependedPixel, calcWidth } from '../utils/units';
 import { connect } from 'react-redux';
-import Icon from '../../ui/Icon/Icon';
-import { common } from '../../styles/common';
-import { titleCase } from '../../utils';
-import data from "../../localization.json";
+import Icon from './Icon';
+import { common } from '../styles/common';
+import { titleCase } from '../utils';
+import data from "../localization.json";
 
 function WeatherDisplay(props) {
   const getDate = (ms = null) => {
