@@ -14,6 +14,7 @@ import java.util.Arrays;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 
 import com.github.reactnativecommunity.location.RNLocationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -45,7 +46,8 @@ public class MainApplication extends NavigationApplication {
             new RNLocationPackage(),
             new VectorIconsPackage(),
             new AsyncStoragePackage(),
-            new MapsPackage()
+            new MapsPackage(),
+            new SafeAreaContextPackage()
         );
     }
 
